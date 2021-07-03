@@ -1,0 +1,82 @@
+<template>
+  <transition name="loading-screen-fade">
+    <div class="homepage-wrapper align-items-center justify-content-center">
+      <img :src="require(`@/assets/next-to-normal/tyler_white_out.jpg`)" />
+      <ClockLoading />
+    </div>
+  </transition>
+</template>
+<script>
+/* eslint-disable */
+import ClockLoading from "@/components/loading/ClockLoading.vue";
+
+export default {
+  name: "LoadingScreen",
+  components: {
+    ClockLoading,
+  },
+  data() {
+    return {
+      is_logged_in: false,
+    };
+  },
+  mounted() {
+    if (localStorage.signedIn) {
+      this.is_logged_in = true;
+    }
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.loading-screen-fade-enter-active,
+.loading-screen-fade-leave-active {
+  transition: opacity 0.5s;
+}
+.loading-screen-fade-enter, .loading-screen-fade-leave-to /* .loading-screen-fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.homepage-wrapper {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &:after {
+    background-color: rgba(0, 0, 0, 0.75);
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+}
+
+.homepage-wrapper img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.35s ease-in-out;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+  z-index: -1;
+}
+
+.h-relative-6 {
+  height: 6em;
+}
+
+.calculated-subject-row-height {
+  height: calc(50% - 3em);
+  width: 100%;
+}
+</style>
