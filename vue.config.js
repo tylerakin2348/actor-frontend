@@ -1,5 +1,8 @@
 module.exports = {
   pwa: {
-    manifestPath: '/manifest.json',
+    manifestPath: "/manifest.json"
+  },
+  devServer: {
+    public: "actor.tylerakin.com"
   }
-}
+};
