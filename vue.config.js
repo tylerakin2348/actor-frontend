@@ -3,6 +3,7 @@ module.exports = {
     manifestPath: "/manifest.json"
   },
   devServer: {
-    public: "actor.tylerakin.com"
+    public: "actor.tylerakin.com",
+    port: 3001
   }
 };
