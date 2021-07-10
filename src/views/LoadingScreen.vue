@@ -2,7 +2,7 @@
   <transition name="loading-screen-fade">
     <div class="homepage-wrapper align-items-center justify-content-center">
       <img :src="require(`@/assets/next-to-normal/tyler_white_out.jpg`)" />
-      <ClockLoading />
+      <ClockLoading color_scheme="color-scheme-light" />
     </div>
   </transition>
 </template>

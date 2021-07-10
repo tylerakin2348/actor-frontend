@@ -13,7 +13,9 @@
         class="overflow-scroll-container block-container-row col-12 col-md-7 align-items-end justify-content-start"
       >
         <div class="acting-credit-wrapper col-12">
+          <ClockLoading color_scheme="color-scheme-dark" v-if="is_loading" />
           <SingleActingCredit
+            v-else
             v-for="acting_credit in acting_credits"
             :key="acting_credit.id"
             :acting_credit="acting_credit"
@@ -32,6 +34,7 @@ import SingleActingCredit from "@/components/crud/acting-credit/SingleActingCred
 import GoBackLink from "@/components/common/go-back/GoBackLink.vue";
 import GoBackLinkListItem from "@/components/common/go-back/GoBackLinkListItem.vue";
 import GoBackNavigationList from "@/components/common/go-back/GoBackNavigationList.vue";
+import ClockLoading from "@/components/loading/ClockLoading.vue";
 
 export default {
   name: "Upcoming Events",
@@ -40,23 +43,28 @@ export default {
     SingleActingCredit,
     GoBackLink,
     GoBackLinkListItem,
-    GoBackNavigationList
+    GoBackNavigationList,
+    ClockLoading
   },
   data() {
     return {
       acting_credits: [],
       name: [],
       relationship: [],
-      errors: []
+      errors: [],
+      is_loading: true,
     };
   },
   created() {
     axios
-      // .get("http://localhost:300/acting_credits")
-      .get("https://vast-fortress-04957.herokuapp.com/api/v1/acting-credits")
+      .get(`${this.$properApiURL}api/v1/acting-credits`)
       .then(response => {
         this.acting_credits = response.data;
         console.log(response);
+
+        // setTimeout(() => {
+          this.is_loading = false;
+        // }, 13000);
       })
       .catch(e => {
         this.error.push(e);

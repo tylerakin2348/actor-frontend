@@ -1,5 +1,5 @@
 <template>
-  <div id="clock_loading">
+  <div id="clock_loading" :class="color_scheme">
     <div class="clockbox">
         <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 600 600">
          <!-- <circle class="circle" cx="300" cy="300" r="253.9"/> -->
@@ -30,6 +30,7 @@
 // https://codepen.io/mor10/pen/XjRVoY
 export default {
     name: 'clockLoading',
+    props: ['color_scheme'],
     
   data() {
     return {
@@ -75,6 +76,9 @@ var interval = setInterval(runTheClock, 1000);
 
 
 <style scoped lang="scss">
+    $lightColorScheme: #fff;
+    $darkColorScheme: #000;
+
     svg {
         opacity: 1;
     }
@@ -135,6 +139,28 @@ var interval = setInterval(runTheClock, 1000);
     stroke: #fff;
     stroke-width: 4;
     stroke-miterlimit: 10;
+}
+
+.color-scheme-light {
+    .circle,
+    .mid-circle,
+    .hour-marks,
+    .hour-arm,
+    .minute-arm,
+    .second-arm {
+        stroke: $lightColorScheme;
+    }
+}
+
+.color-scheme-dark {
+    .circle,
+    .mid-circle,
+    .hour-marks,
+    .hour-arm,
+    .minute-arm,
+    .second-arm {
+        stroke: $darkColorScheme;
+    }
 }
 
 /* Transparent box ensuring arms center properly. */
