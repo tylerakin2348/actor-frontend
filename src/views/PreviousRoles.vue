@@ -57,7 +57,7 @@ export default {
   },
   created() {
     axios
-      .get(`${this.$properApiURL}api/v1/acting-credits`)
+      .get(`${this.$properApiURL}/api/v1/acting-credits`)
       .then(response => {
         this.acting_credits = response.data;
         console.log(response);

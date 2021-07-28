@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const DEVELOPMENT_URL = "http://localhost:3000";
+const DEVELOPMENT_URL = "http://localhost:4000";
 const PRODUCTION_URL = "https://vast-fortress-04957.herokuapp.com";
 
 const securedAxiosInstance = axios.create({

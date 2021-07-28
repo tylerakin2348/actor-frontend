@@ -79,18 +79,15 @@ export default {
 
   methods: {
     checkSignedIn() {
-      if (localStorage.signedIn) {
-        this.$router.replace("/admin");
-      } else {
+      if (! this.$authenticationIsDisabled || localStorage.signedIn) {
         this.$router.replace("/signin");
-      }
+      } 
     },
 
     signOut() {
       this.$http.secured
-        .delete("/signin")
+        .get(`${this.$properApiURL}/api/v1/auth/logout`)
         .then((response) => {
-          delete localStorage.csrf;
           delete localStorage.signedIn;
           this.$router.replace("/");
         })

@@ -57,7 +57,7 @@ export default {
   },
   data() {
     return {
-      acting_credits: [],
+      // acting_credits: [],
       newRecord: [],
       error: "",
       actingCreditCurrentlyBeingEdited: null,
@@ -69,15 +69,29 @@ export default {
     if (!localStorage.signedIn) {
       this.$router.replace("/");
     } else {
-      this.$http.secured
-        .get("/acting_credits")
-        .then((response) => {
-          this.acting_credits = response.data;
-        })
-        .catch((error) => this.setError(error, "Something went wrong"));
+      this.getCurrentActingCredits();
+      // this.$http.secured
+      //   .get(`${this.$properApiURL}/api/v1/acting-credits`)
+      //   .then((response) => {
+      //     this.$store.commit('')
+      //     this.acting_credits = response.data;
+      //   })
+      //   .catch((error) => this.setError(error, "Something went wrong"));
+    }
+  },
+  computed: {
+    acting_credits: function() {
+      return this.$store.state.acting_credits
     }
   },
   methods: {
+    getCurrentActingCredits: function() {
+        this.$http.secured
+        .get(`${this.$properApiURL}/api/v1/acting-credits`)
+        .then((response) => {
+          this.$store.commit('get_acting_credits', response.data)
+        })
+    },
     setRecordBeingEdited: function (record) {
       this.actingCreditCurrentlyBeingEdited = record;
     },

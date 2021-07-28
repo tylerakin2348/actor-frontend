@@ -46,11 +46,11 @@ export default {
     removeRecord(record) {
       this.stagedForDeletion = "";
       this.$http.secured
-        .delete(`/acting_credits/${record.id}`)
+        .delete(`${this.$properApiURL}/api/v1/acting-credits/${record._id}`)
         .then((response) => {
-          this.acting_credits.splice(this.acting_credits.indexOf(record), 1);
+          this.$store.commit('remove_acting_credit', record)
         })
-        .catch((error) => this.setError(error, "Cannot delete record"));
+        .catch((error) => console.log(error));
       jQuery("#" + this.$props.modal_id).modal("hide");
     },
   },

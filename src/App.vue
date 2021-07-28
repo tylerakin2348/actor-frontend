@@ -7,6 +7,7 @@
 
 <script>
 import LoadingScreen from "@/views/LoadingScreen.vue";
+import shouldNotBeVisitingAdminScreen from "@/helpers/shouldNotBeVisitingAdminScreen.js"
 export default {
   components: {
     LoadingScreen,
@@ -20,6 +21,10 @@ export default {
   beforeUpdate() {},
 
   created() {
+    if (shouldNotBeVisitingAdminScreen(this)) {
+      this.$router.replace("/signin");
+    } 
+
     this.signedIn();
   },
   mounted() {

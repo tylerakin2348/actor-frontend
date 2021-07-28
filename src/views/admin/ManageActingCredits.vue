@@ -68,17 +68,17 @@ export default {
   },
   created() {
     if (!localStorage.signedIn) {
-      this.$router.replace("/");
+      // this.$router.replace("/");
     } else {
       this.$http.secured
-        .get("/acting_credits")
+        .get(`${this.$properApiURL}/api/v1/acting-credits`)
         .then((response) => {
           this.acting_credits = response.data;
         })
         .catch((error) => this.setError(error, "Something went wrong"));
 
       this.$http.secured
-        .get("/acting_credits")
+        .get(`${this.$properApiURL}/api/v1/acting-credits`)
         .then((response) => {
           this.artists = response.data;
         })
@@ -97,7 +97,7 @@ export default {
         return;
       }
       this.$http.secured
-        .post("/acting_credits/", {
+        .post(`${this.$properApiURL}/api/v1/acting-credits`, {
           show_title: this.newRecord.show_title,
           show_role: this.newRecord.show_role,
           show_director_name: this.newRecord.show_director_name,

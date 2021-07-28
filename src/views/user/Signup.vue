@@ -78,7 +78,7 @@ components: {
   },
   methods: {
     signup () {
-      this.$http.plain.post('/signup', { email: this.email, password: this.password, password_confirmation: this.password_confirmation })
+      this.$http.plain.post(`${this.$properApiURL}/api/v1/auth/signup`, { email: this.email, password: this.password, password_confirmation: this.password_confirmation })
         .then(response => this.signupSuccessful(response))
         .catch(error => this.signupFailed(error))
     },

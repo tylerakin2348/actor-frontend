@@ -41,9 +41,10 @@ export default {
     GoBackLinkListItem,
     GoBackNavigationList,
   },
-
-  created() {
-    this.checkSignedIn();
+ created() {
+    if (this.$VUE_APP_AUTHENTICATION_ENABLED) {
+      this.checkSignedIn();
+    }
   },
 };
 </script>

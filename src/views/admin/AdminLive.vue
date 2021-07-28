@@ -46,7 +46,9 @@ export default {
   },
 
   created() {
-    this.checkSignedIn();
+    if (this.$VUE_APP_AUTHENTICATION_ENABLED) {
+      this.checkSignedIn();
+    }
   },
 };
 </script>

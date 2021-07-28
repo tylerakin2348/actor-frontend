@@ -118,7 +118,8 @@ const routes = [
     path: '/admin/events/update',
     component: UpdateEvents
   },
-   { 
+   {
+    name: '404',
     path: '*', 
     component: Page404 
   },
