@@ -3,7 +3,6 @@
     <div class="flex items-center justify-between flex-wrap">
       <div class="single-acting-credit-wrapper flex-1 flex justify-between flex-wrap">
         <article class="block font-mono font-semibold flex items-center">
-          {{acting_credit}}
           <h1>{{ acting_credit.show_title }}</h1>
           <div class="credit-row">
             <b class="credit-row-title">Role</b>

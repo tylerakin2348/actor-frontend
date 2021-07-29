@@ -91,13 +91,13 @@ export default {
   methods: {
     updateTheRecord(record) {
       this.$http.secured
-        .patch(`/acting_credits/${record.id}`, {
+        .put(`${this.$properApiURL}/api/v1/acting-credits/${record._id}`, {
           show_title: this.record_to_update.show_title,
           show_role: this.record_to_update.show_role,
           show_director_name: this.record_to_update.show_director_name,
           show_company_name: this.record_to_update.show_company_name,
         })
-        .catch((error) => this.setError(error, "Cannot update record"));
+        .catch((error) => console.log(error));
       jQuery("#" + this.$props.modal_id).modal("hide");
     },
   },
