@@ -51,11 +51,6 @@ export default {
       addNewActingCredit: false
     };
   },
-  created() {
-    if (!localStorage.signedIn) {
-      this.$router.replace("/");
-    }
-  },
   methods: {
     setError(error, text) {
       this.error = (error.response && error.response.data && error.response.data.error) || text;

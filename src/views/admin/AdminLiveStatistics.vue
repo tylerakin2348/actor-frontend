@@ -40,9 +40,7 @@ export default {
     GoBackNavigationList,
   },
 
-  created() {
-    // this.checkSignedIn();
-  },
+
 };
 </script>
 

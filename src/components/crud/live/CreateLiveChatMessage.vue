@@ -58,8 +58,9 @@ export default {
       }
 
       this.$http.secured
-        .post("/live_chat/", {
+        .post(`${this.$availableEndpoints.live_chat}`, {
           message: this.message,
+          message_author: this.$store.getters.currentUser
         })
 
         .then((response) => {
@@ -80,7 +81,7 @@ export default {
       messages.forEach((message) => {
         this.stagedForDeletion = "";
         this.$http.secured
-          .delete(`/live_chat/${message.id}`)
+          .delete(`${this.$availableEndpoints.live_chat}/${message.id}`)
           .then((response) => {
             this.$emit("check-messages");
           })

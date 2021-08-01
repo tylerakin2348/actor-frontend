@@ -84,10 +84,7 @@ export default {
         return;
       }
       this.$http.secured
-        .post("/api/v1/acting-credits/", {
-          // role: this.newRecord.show_role,
-          // company: this.newRecord.show_company_name,
-          // show: this.newRecord.show_title
+        .post(`${this.$properApiURL}/api/v1/acting-credits/`, {
           show_title: this.newRecord.show_title,
           show_role: this.newRecord.show_role,
           show_director_name: this.newRecord.show_director_name,

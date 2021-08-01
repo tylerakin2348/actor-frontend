@@ -21,8 +21,18 @@
         <div class="text-red" v-if="error">{{ error }}</div>
 
         <div class="form-group">
+          <label for="first_name" class="label w-100">First Name</label>
+          <input type="text" v-model="first_name" class="form-control" id="first_name" placeholder="First Name">
+        </div>
+
+        <div class="form-group">
+          <label for="last_name" class="label w-100">Last Name</label>
+          <input type="text" v-model="last_name" class="form-control" id="last_name" placeholder="Last Name">
+        </div>
+
+        <div class="form-group">
           <label for="email" class="label w-100">E-mail Address</label>
-          <input type="email" v-model="email" class="form-control" id="email" placeholder="andy@web-crunch.com">
+          <input type="email" v-model="email" class="form-control" id="email" placeholder="email@emailaddress.com">
         </div>
 
         <div class="form-group">
@@ -64,6 +74,8 @@ components: {
   },
    data () {
     return {
+      first_name: '',
+      last_name: '',
       email: '',
       password: '',
       password_confirmation: '',
@@ -78,22 +90,24 @@ components: {
   },
   methods: {
     signup () {
-      this.$http.plain.post(`${this.$properApiURL}/api/v1/auth/signup`, { email: this.email, password: this.password, password_confirmation: this.password_confirmation })
-        .then(response => this.signupSuccessful(response))
-        .catch(error => this.signupFailed(error))
+      this.$http.plain.post(`${this.$availableEndpoints.signup}`, { 
+        first_name: this.first_name,
+        last_name: this.last_name,
+        email: this.email, 
+        password: this.password, 
+        password_confirmation: this.password_confirmation 
+      })
+      .then(response => this.signupSuccessful(response))
+      .catch(error => this.signupFailed(error))
     },
     signupSuccessful (response) {
-      if (!response.data.csrf) {
-        this.signupFailed(response)
-        return
-      }
-
-      localStorage.csrf = response.data.csrf
+      this.$store.commit('set_current_user', response.data.user)
       localStorage.signedIn = true
       this.error = ''
       this.$router.replace('/admin')
     },
     signupFailed (error) {
+      console.log(error)
       this.error = (error.response && error.response.data && error.response.data.error) || 'Something went wrong'
       delete localStorage.csrf
       delete localStorage.signedIn

@@ -20,14 +20,10 @@ export default {
 
   beforeUpdate() {},
 
-  created() {
-    if (shouldNotBeVisitingAdminScreen(this)) {
-      this.$router.replace("/signin");
-    } 
+  created() {},
 
-    this.signedIn();
-  },
   mounted() {
+  
     if (window.history.length < 3) {
       this.is_loading = true;
       this.setUpLoadingEffectTimer();
@@ -35,7 +31,9 @@ export default {
       this.is_loading = false;
     }
   },
+ 
   methods: {
+    
     setUpLoadingEffectTimer() {
       setTimeout(() => {
         this.is_loading = false;
@@ -46,9 +44,7 @@ export default {
         (error.response && error.response.data && error.response.data.error) ||
         text;
     },
-    signedIn() {
-      return localStorage.signedIn;
-    },
+  
     signOut() {
       this.$http.secured
         .delete("/signin")

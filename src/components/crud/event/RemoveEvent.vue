@@ -44,7 +44,7 @@ export default {
     removeRecord(record) {
       this.stagedForDeletion = "";
       this.$http.secured
-        .delete(`/events/${record.id}`)
+        .delete(`${this.$availableEndpoints.events}/${record._id}`)
         .then((response) => {
           this.events.splice(this.events.indexOf(record), 1);
         })

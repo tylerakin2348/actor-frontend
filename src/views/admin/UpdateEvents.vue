@@ -14,8 +14,7 @@
         </GoBackLinkListItem>
       </GoBackNavigationList>
     </div>
-
-    <div class="overflow-scroll-container block-container-row col-12 col-md-7">
+    <scrolling-data-container>
       <div class="text-red" v-if="error">{{ error }}</div>
       <div class="event-wrapper col-12">
         <SingleEvent
@@ -29,7 +28,7 @@
           v-on:stage-event-for-deletion="stageEventForDeletion"
         />
       </div>
-    </div>
+    </scrolling-data-container>
   </div>
 </template>
 
@@ -39,6 +38,7 @@ import SingleEvent from "@/components/crud/event/SingleEvent.vue";
 import GoBackLink from "@/components/common/go-back/GoBackLink.vue";
 import GoBackLinkListItem from "@/components/common/go-back/GoBackLinkListItem.vue";
 import GoBackNavigationList from "@/components/common/go-back/GoBackNavigationList.vue";
+import ScrollingDataContainer from "@/components/layout-containers/ScrollingDataContainer.vue";
 
 export default {
   name: "AdminEvents",
@@ -48,6 +48,7 @@ export default {
     GoBackLink,
     GoBackLinkListItem,
     GoBackNavigationList,
+    ScrollingDataContainer,
   },
   data() {
     return {
@@ -60,16 +61,12 @@ export default {
     };
   },
   created() {
-    if (!localStorage.signedIn) {
-      this.$router.replace("/");
-    } else {
-      this.$http.secured
-        .get("/events")
-        .then((response) => {
-          this.events = response.data;
-        })
-        .catch((error) => this.setError(error, "Something went wrong"));
-    }
+    this.$http.secured
+      .get(`${this.$availableEndpoints.events}`)
+      .then((response) => {
+        this.events = response.data;
+      })
+      .catch((error) => this.setError(error, "Something went wrong"));
   },
   methods: {
     setEventBeingEdited: function (event) {
@@ -142,16 +139,6 @@ export default {
 
   .block-container-row {
     align-items: center;
-  }
-}
-
-.overflow-scroll-container {
-  align-items: center;
-  justify-content: center;
-  overflow-y: hidden;
-
-  @media screen and (min-width: 769px) {
-    padding-top: 12vh;
   }
 }
 

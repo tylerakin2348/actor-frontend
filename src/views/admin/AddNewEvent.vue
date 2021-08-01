@@ -55,23 +55,12 @@ export default {
     };
   },
   created() {
-    if (!localStorage.signedIn) {
-      this.$router.replace("/");
-    } else {
-      this.$http.secured
-        .get("/api/v1/events/")
-        .then(response => {
-          this.acting_credits = response.data;
-        })
-        .catch(error => this.setError(error, "Something went wrong"));
-
-      this.$http.secured
-        .get("/api/v1/events/")
-        .then(response => {
-          this.artists = response.data;
-        })
-        .catch(error => this.setError(error, "Something went wrong"));
-    }
+    this.$http.secured
+    .get(`${this.$availableEndpoints.events}`)
+      .then(response => {
+        this.artists = response.data;
+      })
+      .catch(error => this.setError(error, "Something went wrong"));
   },
   methods: {
     setError(error, text) {
@@ -83,7 +72,7 @@ export default {
         return;
       }
       this.$http.secured
-        .post("/api/v1/events/", {
+        .post(`${this.$availableEndpoints.events}`, {
           event_name: this.newEvent.event_name,
           event_company: this.newEvent.event_company,
           // event_start_date: this.newEvent.event_start_date,

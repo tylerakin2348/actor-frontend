@@ -97,11 +97,9 @@ export default {
         return;
       }
       this.$http.secured
-        .post("/api/v1/events/", {
+        .post(`${this.$availableEndpoints.events}`, {
           event_name: this.newEvent.event_name,
           event_company: this.newEvent.event_company,
-          // event_start_date: this.newEvent.event_start_date,
-          // event_end_date: this.newEvent.event_end_date,
           event_url: this.newEvent.event_url
         })
 

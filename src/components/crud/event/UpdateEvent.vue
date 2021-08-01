@@ -102,7 +102,7 @@ export default {
   methods: {
     updateTheEvent(event) {
       this.$http.secured
-        .patch(`/events/${event.id}`, {
+        .put(`${this.$availableEndpoints.events}/${event._id}`, {
           event_name: event.event_name,
           event_group: event.event_group,
           event_start_date: event.event_start_date,

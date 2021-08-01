@@ -73,20 +73,24 @@ export default {
     GoBackNavigationList,
   },
 
-  created() {
-    this.checkSignedIn();
+  mounted() {
+    console.log(this.$store.getters.currentUser)
+    //  this.$http.secured
+    //     .get(`${this.$properApiURL}/api/v1/auth/logout`)
+    //     .then((response) => {
+    //       delete localStorage.signedIn;
+    //       this.$router.replace("/");
+    //     })
+    //     .catch((error) => this.setError(error, "Cannot sign out"));
+        
+        // localStorage.currentUser = {
+      //   response
+      // }
   },
-
   methods: {
-    checkSignedIn() {
-      if (! this.$authenticationIsDisabled || localStorage.signedIn) {
-        this.$router.replace("/signin");
-      } 
-    },
-
     signOut() {
       this.$http.secured
-        .get(`${this.$properApiURL}/api/v1/auth/logout`)
+        .get(`${this.$availableEndpoints.logout}`)
         .then((response) => {
           delete localStorage.signedIn;
           this.$router.replace("/");

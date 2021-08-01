@@ -68,26 +68,28 @@ components: {
   },
   methods: {
     signin () {
-      this.$http.plain.post(`${this.$properApiURL}/api/v1/auth/signin`, { email: this.email, password: this.password })
-        .then(response => this.signinSuccessful(response))
-        .catch(error => this.signinFailed(error))
+      this.$http.plain.post(`${this.$availableEndpoints.signin}`, { 
+        email: this.email, 
+        password: this.password 
+      })
+      .then(response => this.signinSuccessful(response))
+      .catch(error => this.signinFailed(error))
     },
-    signinSuccessful (response) {
-      // console.log('hitting signin Scucess', response)
-      // if (!response.data.csrf) {
-      //   this.signinFailed(response)
-      //   return
-      // }
-      // localStorage.csrf = response.data.csrf
+    signinSuccessful (response) { 
+      console.log(response)
+      this.$store.commit( 'set_current_user', response.data.user )
       localStorage.signedIn = true
       this.error = ''
       this.$router.replace('/admin')
     },
     signinFailed (error) {
-      console.log('hitting signin failed', error)
+      console.log('asdf')
+      if (error.response.status === 401) {
+        this.error = "Invalid email or password"
+      } else {
+        this.error = (error.response && error.response.data && error.response.data.error) || ''
+      }
 
-      this.error = (error.response && error.response.data && error.response.data.error) || ''
-      // delete localStorage.csrf
       delete localStorage.signedIn
     },
     checkSignedIn () {

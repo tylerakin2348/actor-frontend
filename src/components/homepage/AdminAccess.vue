@@ -1,6 +1,6 @@
 <template>
   <router-link class="admin_dashboard_link" :to="{ path: admin_dashboard_url }">
-    Admin Dashboard
+    {{current_user}} - Admin Dashboard
   </router-link>
 </template>
 
@@ -14,6 +14,11 @@ export default {
       admin_dashboard_url: "/admin",
       // msg: 'Welcome to Your Vue.js App',
     };
+  },
+  computed: {
+    current_user: function() {
+      return this.$store.getters.currentUser
+    }
   },
 };
 </script>

@@ -23,6 +23,7 @@ import ManageEvents from '@/views/admin/ManageEvents.vue';
 import UpdateEvents from '@/views/admin/UpdateEvents.vue';
 import AddNewEvent from '@/views/admin/AddNewEvent.vue';
 import AdminEventStatistics from '@/views/admin/AdminEventStatistics.vue';
+import shouldNotBeVisitingAdminScreen from "@/helpers/shouldNotBeVisitingAdminScreen.js"
 
 Vue.use(VueRouter);
 
@@ -58,6 +59,7 @@ const routes = [
   },
  
   { 
+    name: 'Sign In',
     path: '/signin', 
     component: Signin 
   },
@@ -131,5 +133,13 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  if ( shouldNotBeVisitingAdminScreen() && to.path.includes('admin') ) {
+    next({ name: 'Sign In' })
+  } else {
+    next()
+  }
+})
 
 export default router;

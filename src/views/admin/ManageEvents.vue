@@ -60,23 +60,12 @@ export default {
     };
   },
   created() {
-    if (!localStorage.signedIn) {
-      this.$router.replace("/");
-    } else {
-      this.$http.secured
-        .get("/events")
-        .then((response) => {
-          this.events = response.data;
-        })
-        .catch((error) => this.setError(error, "Something went wrong"));
-
-      this.$http.secured
-        .get("/events")
-        .then((response) => {
-          this.events = response.data;
-        })
-        .catch((error) => this.setError(error, "Something went wrong"));
-    }
+    this.$http.secured
+      .get(`${this.$availableEndpoints.events}`)
+      .then((response) => {
+        this.events = response.data;
+      })
+      .catch((error) => this.setError(error, "Something went wrong"));
   },
   methods: {
     setError(error, text) {
@@ -90,7 +79,7 @@ export default {
         return;
       }
       this.$http.secured
-        .post("/events/", {
+        .post(`${this.$availableEndpoints.events}`, {
           event_name: this.newEvent.event_name,
           event_group: this.newEvent.event_group,
           event_start_date: this.newEvent.event_start_date,

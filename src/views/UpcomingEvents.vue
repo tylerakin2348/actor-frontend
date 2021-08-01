@@ -1,26 +1,22 @@
 <template>
-  <div id="scroll-on-mobile">
-    <div class="block-container d-flex flex-wrap align-items-end">
-      <div class="block-container-row large-breakup-border col-12 col-md-5 p-0">
-        <PageTitleBlock page_title="Upcoming Events" classes="h1" />
-        <GoBackNavigationList>
-          <GoBackLinkListItem>
-            <GoBackLink url="/" link_text="Back to Home" />
-          </GoBackLinkListItem>
-        </GoBackNavigationList>
-      </div>
-      <div
-        class="overflow-scroll-container block-container-row col-12 col-md-7 align-items-end justify-content-start"
-      >
-        <div class="event-wrapper col-12" v-if="events">
-          <SingleEvent :event="event" :can_edit="false" v-for="event in events" :key="event.id" />
-        </div>
-        <div class="event-wrapper col-12" v-else>
-          I must be taking a break. <br />
-          Stay tuned for new event announcements soon!
-        </div>
-      </div>
+  <div class="block-container d-flex flex-wrap align-items-end">
+    <div class="block-container-row large-breakup-border col-12 col-md-5 p-0">
+      <PageTitleBlock page_title="Upcoming Events" classes="h1" />
+      <GoBackNavigationList>
+        <GoBackLinkListItem>
+          <GoBackLink url="/" link_text="Back to Home" />
+        </GoBackLinkListItem>
+      </GoBackNavigationList>
     </div>
+    <scrolling-data-container>
+      <div class="event-wrapper col-12" v-if="events">
+        <SingleEvent :event="event" :can_edit="false" v-for="event in events" :key="event.id" />
+      </div>
+      <div class="event-wrapper col-12" v-else>
+        I must be taking a break. <br />
+        Stay tuned for new event announcements soon!
+      </div>
+    </scrolling-data-container>
   </div>
 </template>
 <script>
@@ -31,6 +27,7 @@ import SingleEvent from "@/components/crud/event/SingleEvent.vue";
 import GoBackLink from "@/components/common/go-back/GoBackLink.vue";
 import GoBackLinkListItem from "@/components/common/go-back/GoBackLinkListItem.vue";
 import GoBackNavigationList from "@/components/common/go-back/GoBackNavigationList.vue";
+import ScrollingDataContainer from "@/components/layout-containers/ScrollingDataContainer.vue";
 
 export default {
   name: "Page Title Block",
@@ -39,7 +36,8 @@ export default {
     SingleEvent,
     GoBackLink,
     GoBackLinkListItem,
-    GoBackNavigationList
+    GoBackNavigationList,
+    ScrollingDataContainer
   },
   data() {
     return {
@@ -48,7 +46,7 @@ export default {
   },
   created() {
     axios
-      .get("https://vast-fortress-04957.herokuapp.com/api/v1/events")
+      .get(`${this.$availableEndpoints.events}`)
       .then(response => {
         this.events = response.data;
 
@@ -69,6 +67,9 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
 
+  .single_event_item {
+    width: 100%;
+  }
   @media screen and (min-width: 769px) {
     justify-content: flex-start;
   }

@@ -1,14 +1,12 @@
-const shouldNotBeVisitingAdminScreen = function(currentVueInstance) {
-    let authenticationServiceStatus = currentVueInstance.$authenticationServiceStatus;
+const shouldNotBeVisitingAdminScreen = function() {
+    let authenticationServiceStatus = process.env.VUE_APP_AUTHENTICATION_SERVICE_STATUS;
     let userIsSignedIn = localStorage.signedIn;
-    let currentValidRouteIncludesAdmin = currentVueInstance.$route.path.includes('admin') && currentVueInstance.$route.name !== "404";
     
     if (authenticationServiceStatus === 'disabled') {
         return false;
     }
 
-    if ((authenticationServiceStatus === 'enabled') && (! userIsSignedIn) && currentValidRouteIncludesAdmin) {
-        console.log('yup')
+    if ((! userIsSignedIn)) {
         return true;
     }
 };

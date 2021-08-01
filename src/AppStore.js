@@ -3,11 +3,14 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+const current_user_from_storage = localStorage.getItem('current_user');
+
 const store = new Vuex.Store({
   state: {
     acting_credits: [],
     count: 0,
     isLoggedIn: false,
+    current_user: current_user_from_storage ? current_user_from_storage : null,
   },
   mutations: {
     increment (state) {
@@ -15,6 +18,10 @@ const store = new Vuex.Store({
     },
     get_acting_credits(state, currentlyAvailableActingCredits) {
         state.acting_credits = currentlyAvailableActingCredits;
+    },
+    set_current_user(state, current_user) {
+      state.current_user = JSON.stringify(current_user);
+      localStorage.setItem( 'current_user', state.current_user);
     },
     remove_acting_credit(state, actingCreditToRemove) {
         let theCurrentState = state.acting_credits;
@@ -43,7 +50,14 @@ const store = new Vuex.Store({
   getters: {
       currentActingCredits: state => {
           return state.acting_credits;
-      }
+      },
+      currentUser: state => {
+        let theCurrentUser = JSON.parse(state.current_user)
+        console.log(theCurrentUser)
+        return theCurrentUser.first_name + ' ' + theCurrentUser.last_name;
+        // return state.current_user
+
+    }
   }
 })
 

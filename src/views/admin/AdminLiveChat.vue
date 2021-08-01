@@ -68,11 +68,7 @@ export default {
     };
   },
   created() {
-    if (!localStorage.signedIn) {
-      this.$router.replace("/");
-    } else {
-      this.checkForNewMessage();
-    }
+    this.checkForNewMessage();
   },
   methods: {
     scrollToNewMessage: function () {
