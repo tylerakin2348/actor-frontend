@@ -5,7 +5,7 @@ const determinedDatabaseUrl = determinedDatabaseURL() + '/api';
 const availableEndpoints = {
     events: `${determinedDatabaseUrl}/${apiVersion}/events`,
     acting_credits: `${determinedDatabaseUrl}/${apiVersion}/acting-credits`,
-    live_chat: `${determinedDatabaseUrl}/${apiVersion}/live_chat`,
+    live_chat: `${determinedDatabaseUrl}/${apiVersion}/live-chat`,
     signup: `${determinedDatabaseUrl}/${apiVersion}/auth/signup`,
     signin: `${determinedDatabaseUrl}/${apiVersion}/auth/signin`,
     logout: `${determinedDatabaseUrl}/${apiVersion}/auth/logout`,

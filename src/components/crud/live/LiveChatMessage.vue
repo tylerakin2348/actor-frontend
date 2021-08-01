@@ -13,24 +13,10 @@
           </div>
         </article>
       </div>
-      <div v-if="!can_edit">
-        <button
-          class="bg-transparent text-sm hover:bg-blue hover:text-white text-blue border border-blue no-underline font-bold py-2 px-4 mr-2 rounded"
-          @click.prevent="editEvent(live_chat.message)"
-        >
-          Edit
-        </button>
-        <button
-          class="bg-transparent text-sm hover:bg-red text-red hover:text-white no-underline font-bold py-2 px-4 rounded border border-red"
-          @click.prevent="removeEvent(live_chat.message)"
-        >
-          Delete
-        </button>
-      </div>
     </div>
-    <!-- <div v-if="live_chat.message == liveChatCurrentlyBeingEdited">
+    <div v-if="live_chat.message == liveChatCurrentlyBeingEdited">
       <UpdateLiveChatMessage :message="live_chat.message" />
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -64,8 +50,8 @@ export default {
   },
   methods: {
     setPrettiedTime() {
-      let theTimeFromProp = new Date(this.$props.live_chat.created_at);
-      theTimeFromProp = theTimeFromProp.toLocaleTimeString();
+      let theTimeFromProp = new Date(this.$props.live_chat.time_created);
+      theTimeFromProp = theTimeFromProp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
       this.prettiedTime = theTimeFromProp;
     },
@@ -77,7 +63,7 @@ export default {
 
     removeEvent(event) {
       this.$http.secured
-        .delete(`/live_chat/${event.id}`)
+        .delete(`${this.$availableEndpoints.live_chat}/${event.id}`)
         .then((response) => {
           this.events.splice(this.events.indexOf(event), 1);
         })

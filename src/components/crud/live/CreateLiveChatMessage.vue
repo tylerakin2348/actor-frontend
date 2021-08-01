@@ -60,7 +60,7 @@ export default {
       this.$http.secured
         .post(`${this.$availableEndpoints.live_chat}`, {
           message: this.message,
-          message_author: this.$store.getters.currentUser
+          message_author: 'Tyler Akin'
         })
 
         .then((response) => {
@@ -78,11 +78,17 @@ export default {
       // up messages. Keep having issues there, so the temp solution is to run a
       // loop to delete each available message one at a time.
       let messages = this.$props.available_chat_messages;
+
+      if (! messages.length > 0) {
+        this.$router.replace('/admin/live');
+      }
+
       messages.forEach((message) => {
         this.stagedForDeletion = "";
         this.$http.secured
-          .delete(`${this.$availableEndpoints.live_chat}/${message.id}`)
+          .delete(`${this.$availableEndpoints.live_chat}/${message._id}`)
           .then((response) => {
+            this.$router.replace('/admin/live');
             this.$emit("check-messages");
           })
           .catch((error) => this.setError(error, "Cannot delete record"));

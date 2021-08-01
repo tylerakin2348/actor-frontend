@@ -117,7 +117,7 @@ export default {
 
     checkForNewMessage: function () {
       this.$http.secured
-        .get("/live_chat")
+        .get(`${this.$availableEndpoints.live_chat}`)
         .then((response) => {
           this.checkForActiveChat(response);
         })
