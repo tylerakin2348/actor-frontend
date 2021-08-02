@@ -60,13 +60,14 @@ export default {
       this.$http.secured
         .post(`${this.$availableEndpoints.live_chat}`, {
           message: this.message,
-          message_author: 'Tyler Akin'
+          message_author: this.$store.getters.currentUser
         })
 
         .then((response) => {
           this.liveChats.push(response.data);
           this.message = "";
           this.$emit("check-messages");
+          this.$store.commit('chat_is_active', true);
         })
         .catch((error) => this.setError(error, "Cannot create chat"));
     },
@@ -88,11 +89,15 @@ export default {
         this.$http.secured
           .delete(`${this.$availableEndpoints.live_chat}/${message._id}`)
           .then((response) => {
-            this.$router.replace('/admin/live');
             this.$emit("check-messages");
           })
           .catch((error) => this.setError(error, "Cannot delete record"));
       });
+
+      if (messages.length < 1) {
+          this.$router.replace('/admin/live');
+          this.$store.commit('chat_is_active', false);
+      }
     },
   },
 };

@@ -123,16 +123,6 @@ export default {
   }
 }
 
-.overflow-scroll-container {
-  overflow-y: hidden;
-
-  @media screen and (min-width: 769px) {
-    // height: 85%;
-    padding-top: 12vh;
-    overflow-y: scroll;
-  }
-}
-
 .block-container-row-center {
   width: 100%;
   display: flex;

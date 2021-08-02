@@ -1,6 +1,8 @@
 <template>
     <div class="overflow-scroll-container block-container-row col-12 col-md-7 align-items-end justify-content-start">
+      <div class="data-content-wrapper">
         <slot></slot>
+      </div>
     </div>
 </template>
 
@@ -57,7 +59,15 @@ export default {
 </script>
 
 <style lang="scss">
+.data-content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
+  @media screen and (min-width: 769px) {
+    justify-content: flex-start;
+  }
+}
 @media screen and (min-width: 769px) {
   .block-container {
     height: 100vh;

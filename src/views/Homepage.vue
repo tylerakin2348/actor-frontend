@@ -2,7 +2,7 @@
   <div id="do-not-scroll-on-mobile">
     <div
       :class="
-        chat_is_active ? 'homepage-wrapper active-chat' : 'homepage-wrapper'
+        current_chat_status ? 'homepage-wrapper active-chat' : 'homepage-wrapper'
       "
     >
       <img :src="require(`@/assets/next-to-normal/next_to_normal18.jpg`)" />
@@ -25,7 +25,7 @@
       <layout-row class="middle-row">
         <layout-column
           class="d-flex align-items-center justify-content-center flex-column col-12"
-          v-if="chat_is_active"
+          v-if="current_chat_status"
         >
           <div
             class="d-flex align-items-center justify-content-center flex-column col-12"
@@ -76,6 +76,7 @@ import LayoutColumn from "@/components/layout-containers/LayoutColumn.vue";
 import AdminAccess from "@/components/homepage/AdminAccess";
 import LiveChatMessage from "@/components/crud/live/LiveChatMessage.vue";
 import IntervalLifecycle from "@/components/interval-lifecycle.js";
+import checkForAvailableData from "../helpers/checkForAvailableData";
 
 export default {
   name: "Home",
@@ -92,6 +93,7 @@ export default {
       chat_is_active: false,
     };
   },
+
   mounted() {
     if (localStorage.signedIn) {
       this.is_logged_in = true;
@@ -105,21 +107,17 @@ export default {
   unmounted() {
     setUpLiveChatScripts.tearDownNewMessageListener();
   },
-
+  computed: {
+    current_chat_status: function() {
+      return this.$store.getters.currentChatStatus;
+    }
+  },
   methods: {
-    checkForActiveChat: function (response) {
-      if (response.data.length > 0) {
-        this.chat_is_active = true;
-      } else {
-        this.chat_is_active = false;
-      }
-    },
-
     checkForNewMessage: function () {
       this.$http.secured
         .get(`${this.$availableEndpoints.live_chat}`)
         .then((response) => {
-          this.checkForActiveChat(response);
+          checkForAvailableData(this, response, 'updateChatStatus');
         })
         .catch((error) => this.setError(error, "Something went wrong"));
     },

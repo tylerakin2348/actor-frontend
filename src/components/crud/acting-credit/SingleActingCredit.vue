@@ -1,5 +1,5 @@
 <template>
-  <div id="contacts" class="single_acting_credit">
+  <single-db-entry-container>
     <div class="flex items-center justify-between flex-wrap">
       <div class="single-acting-credit-wrapper flex-1 flex justify-between flex-wrap">
         <article class="block font-mono font-semibold flex items-center">
@@ -51,12 +51,13 @@
         modal_id="remove-acting-credit-modal"
       />
     </div>
-  </div>
+  </single-db-entry-container>
 </template>
 
 <script>
 import UpdateActingCredit from "@/components/crud/acting-credit/UpdateActingCredit.vue";
 import RemoveActingCredit from "@/components/crud/acting-credit/RemoveActingCredit.vue";
+import SingleDbEntryContainer from "@/components/layout-containers/SingleDbEntryContainer.vue";
 
 export default {
   props: {
@@ -73,7 +74,8 @@ export default {
   },
   components: {
     UpdateActingCredit,
-    RemoveActingCredit
+    RemoveActingCredit,
+    SingleDbEntryContainer
   },
   data() {
     return {

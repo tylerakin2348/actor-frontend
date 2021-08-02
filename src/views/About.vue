@@ -8,9 +8,7 @@
         </GoBackLinkListItem>
       </GoBackNavigationList>
     </div>
-    <div
-      class="overflow-scroll-container block-container-row col-12 col-md-7 align-items-end justify-content-start"
-    >
+    <scrolling-data-container>
       <div class="about-page-wrapper col-12 h2">
         A recurring membcer of the CenterStage company. And a trained vocalist.
         Outside of theatre and music in general, Tyler is a software developer
@@ -24,7 +22,7 @@
           <li>Private Voice - Dr. Gregory Brewton</li>
         </ul>
       </div>
-    </div>
+    </scrolling-data-container>
   </div>
 </template>
 <script>
@@ -33,6 +31,7 @@ import PageTitleBlock from "@/components/common/PageTitleBlock.vue";
 import GoBackLink from "@/components/common/go-back/GoBackLink.vue";
 import GoBackLinkListItem from "@/components/common/go-back/GoBackLinkListItem.vue";
 import GoBackNavigationList from "@/components/common/go-back/GoBackNavigationList.vue";
+import ScrollingDataContainer from "@/components/layout-containers/ScrollingDataContainer.vue";
 
 export default {
   name: "Page Title Block",
@@ -41,6 +40,7 @@ export default {
     GoBackLink,
     GoBackLinkListItem,
     GoBackNavigationList,
+    ScrollingDataContainer
   },
 };
 </script>
@@ -49,12 +49,6 @@ export default {
 .about-page-wrapper {
   padding-top: 1em;
   text-align: left;
-
-  .single_acting_credit {
-    @media screen and (min-width: 769px) {
-      width: 50%;
-    }
-  }
 }
 .large-breakup-border {
   padding: 0;
@@ -97,14 +91,6 @@ export default {
 
   .block-container-row {
     align-items: center;
-  }
-}
-
-.overflow-scroll-container {
-  overflow-y: hidden;
-
-  @media screen and (min-width: 769px) {
-    padding-top: 12vh;
   }
 }
 

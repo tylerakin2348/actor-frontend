@@ -10,11 +10,15 @@ const store = new Vuex.Store({
     acting_credits: [],
     count: 0,
     isLoggedIn: false,
+    chat_is_active: false,
     current_user: current_user_from_storage ? current_user_from_storage : null,
   },
   mutations: {
     increment (state) {
       state.count++
+    },
+    updateChatStatus(state, new_status) {
+      state.chat_is_active = new_status;
     },
     get_acting_credits(state, currentlyAvailableActingCredits) {
         state.acting_credits = currentlyAvailableActingCredits;
@@ -28,6 +32,7 @@ const store = new Vuex.Store({
         theCurrentState.splice(state.acting_credits.indexOf(actingCreditToRemove), 1);
         state.acting_credits = theCurrentState;
     },
+
     isLoggedIn(state, loggedInStatus) {
         if (loggedInStatus) {
             state.isLoggedIn = true;
@@ -56,7 +61,9 @@ const store = new Vuex.Store({
         console.log(theCurrentUser)
         return theCurrentUser.first_name + ' ' + theCurrentUser.last_name;
         // return state.current_user
-
+    },
+    currentChatStatus: state => {
+      return state.chat_is_active;
     }
   }
 })
