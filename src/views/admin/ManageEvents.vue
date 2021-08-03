@@ -1,6 +1,6 @@
 <template>
-  <div class="block-container d-flex flex-wrap align-items-end">
-    <div class="block-container-row large-breakup-border col-12 col-md-5 p-0">
+   <bordered-left-title-style-container>
+      <bordered-left-title-column>
       <PageTitleBlock page_title="Manage Events" classes="h1" />
       <GoBackNavigationList>
         <GoBackLinkListItem>
@@ -10,9 +10,10 @@
           <GoBackLink url="/" link_text="Back to Home" />
         </GoBackLinkListItem>
       </GoBackNavigationList>
-    </div>
+      </bordered-left-title-column>
 
-    <div class="overflow-scroll-container block-container-row col-12 col-md-7">
+    <scrolling-data-container component_classes="align-content-center">
+
       <div class="text-red" v-if="error">{{ error }}</div>
       <router-link
         class="btn btn-outline-secondary outline-fixed-width-style m-2"
@@ -32,8 +33,8 @@
       >
         Event Statistics
       </a> -->
-    </div>
-  </div>
+    </scrolling-data-container>
+   </bordered-left-title-style-container>
 </template>
 
 <script>
@@ -41,6 +42,9 @@ import PageTitleBlock from "@/components/common/PageTitleBlock.vue";
 import GoBackLink from "@/components/common/go-back/GoBackLink.vue";
 import GoBackLinkListItem from "@/components/common/go-back/GoBackLinkListItem.vue";
 import GoBackNavigationList from "@/components/common/go-back/GoBackNavigationList.vue";
+import ScrollingDataContainer from "@/components/layout-containers/ScrollingDataContainer.vue";
+import BorderedLeftTitleColumn from "@/components/layout-containers/BorderedLeftTitleColumn.vue";
+import BorderedLeftTitleStyleContainer from '@/components/layout-containers/BorderedLeftTitleStyleContainer.vue';
 
 export default {
   name: "AdminEvents",
@@ -49,6 +53,9 @@ export default {
     GoBackLink,
     GoBackLinkListItem,
     GoBackNavigationList,
+    ScrollingDataContainer,
+    BorderedLeftTitleColumn,
+    BorderedLeftTitleStyleContainer
   },
   data() {
     return {

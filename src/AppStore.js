@@ -4,13 +4,14 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const current_user_from_storage = localStorage.getItem('current_user');
+const from_storage_chat_is_active = JSON.parse(localStorage.getItem('chat_is_active'));
 
 const store = new Vuex.Store({
   state: {
     acting_credits: [],
     count: 0,
     isLoggedIn: false,
-    chat_is_active: false,
+    chat_is_active: from_storage_chat_is_active === 'true' ? true : false,
     current_user: current_user_from_storage ? current_user_from_storage : null,
   },
   mutations: {
@@ -19,6 +20,7 @@ const store = new Vuex.Store({
     },
     updateChatStatus(state, new_status) {
       state.chat_is_active = new_status;
+      localStorage.setItem( 'chat_is_active', JSON.stringify(state.chat_is_active));
     },
     get_acting_credits(state, currentlyAvailableActingCredits) {
         state.acting_credits = currentlyAvailableActingCredits;

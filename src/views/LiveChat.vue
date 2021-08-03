@@ -1,27 +1,27 @@
 <template>
-  <div class="block-container d-flex flex-wrap align-items-end livechat-wrapper">
-    <img :src="require(`@/assets/next-to-normal/next_to_normal18.jpg`)" />
-    <div class="block-container-row large-breakup-border col-12 col-md-5 p-0">
-      <PageTitleBlock page_title="Live Chat" classes="h1" />
-      <GoBackNavigationList>
-        <GoBackLinkListItem>
-          <GoBackLink url="/" link_text="Back to Home" />
-        </GoBackLinkListItem>
-      </GoBackNavigationList>
-    </div>
+  <div class="background-image">
+    <bordered-left-title-style-container component_classes="align-content-center">
+      <img :src="require(`@/assets/next-to-normal/next_to_normal18.jpg`)" />
+      <bordered-left-title-column>
+        <PageTitleBlock page_title="Live Chat" classes="h1" />
+        <GoBackNavigationList>
+          <GoBackLinkListItem>
+            <GoBackLink url="/" link_text="Back to Home" />
+          </GoBackLinkListItem>
+        </GoBackNavigationList>
+      </bordered-left-title-column>
 
-    <div
-      class="overflow-scroll-container block-container-row col-12 col-md-7 justify-content-start"
-    >
-      <div v-if="chat_is_active">
-        <LiveChatMessage
-          v-for="live_chat in live_chats"
-          :key="live_chat.id"
-          :live_chat="live_chat"
-        />
-      </div>
-      <div v-else>I'm not live right now. Come back soon!</div>
-    </div>
+      <scrolling-data-container component_classes="align-content-center">
+        <div v-if="current_chat_status">
+          <LiveChatMessage
+            v-for="live_chat in live_chats"
+            :key="live_chat.id"
+            :live_chat="live_chat"
+          />
+        </div>
+        <div v-else>I'm not live right now. Come back soon!</div>
+      </scrolling-data-container>
+    </bordered-left-title-style-container>
   </div>
 </template>
 
@@ -33,6 +33,11 @@ import GoBackLink from "@/components/common/go-back/GoBackLink.vue";
 import GoBackLinkListItem from "@/components/common/go-back/GoBackLinkListItem.vue";
 import GoBackNavigationList from "@/components/common/go-back/GoBackNavigationList.vue";
 import IntervalLifecycle from "@/components/interval-lifecycle.js";
+import ClockLoading from "@/components/loading/ClockLoading.vue";
+import checkForAvailableData from "../helpers/checkForAvailableData";
+import ScrollingDataContainer from "@/components/layout-containers/ScrollingDataContainer.vue";
+import BorderedLeftTitleColumn from "@/components/layout-containers/BorderedLeftTitleColumn.vue";
+import BorderedLeftTitleStyleContainer from '../components/layout-containers/BorderedLeftTitleStyleContainer.vue';
 
 export default {
   name: "LiveChat",
@@ -41,22 +46,21 @@ export default {
     GoBackLink,
     GoBackLinkListItem,
     GoBackNavigationList,
-    PageTitleBlock
+    PageTitleBlock,
+    ClockLoading,
+    ScrollingDataContainer,
+    BorderedLeftTitleColumn,
+    BorderedLeftTitleStyleContainer
   },
   data() {
     return {
-      is_logged_in: false,
-      chat_is_active: false,
       live_chats: []
     };
   },
+  beforeMount() {
+    this.checkForNewMessage();
+  },
   mounted() {
-    if (localStorage.signedIn) {
-      this.is_logged_in = true;
-    }
-
-    // this.checkForNewMessage();
-
     let setUpLiveChatScripts = new IntervalLifecycle(this.checkForNewMessage);
 
     setUpLiveChatScripts.setUpNewMessageListener();
@@ -64,7 +68,11 @@ export default {
   unmounted() {
     setUpLiveChatScripts.tearDownNewMessageListener();
   },
-
+  computed: {
+    current_chat_status: function() {
+      return this.$store.getters.currentChatStatus;
+    }
+  },
   methods: {
     scrollToNewMessage: function() {
       let theCurrentElement = this.$el.querySelector(".live-chat-container");
@@ -76,101 +84,33 @@ export default {
       theCurrentElement.scrollTop = theCurrentElement.scrollHeight;
     },
 
-    checkForActiveChat: function(response) {
-      if (response.data.length > 0) {
-        this.live_chats = response.data;
-        this.chat_is_active = true;
-      } else {
-        this.chat_is_active = false;
-      }
-    },
-
     checkForNewMessage: function() {
       this.$http.secured
         .get(`${this.$availableEndpoints.live_chat}`)
         .then(response => {
-          this.checkForActiveChat(response);
+          checkForAvailableData(this, response, 'updateChatStatus')
           this.live_chats = response.data;
           setTimeout(() => {
             this.scrollToNewMessage();
           }, 100);
         })
-        .catch(error => this.setError(error, "Something went wrong"));
+        .catch(error => console.log(error));
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.large-breakup-border:after {
-  background-color: rgba(200, 139, 139, 1);
-  content: "";
-  display: inline-block;
-  height: 0.75em;
-  width: 100%;
 
-  @media screen and (min-width: 769px) {
-    height: 85%;
-    width: 1.5em;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-}
-
-@media screen and (min-width: 769px) {
-  .block-container {
-    height: 100vh;
-  }
-}
-
-.block-container-row {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
-}
-
-@media screen and (min-width: 769px) {
-  .block-container {
-    height: 100vh;
-  }
-
-  .block-container-row {
-    align-items: center;
-  }
-}
-
-.overflow-scroll-container {
-  align-items: center;
-  justify-content: center;
-  // overflow-y: hidden;
-
-  @media screen and (min-width: 769px) {
-    padding-top: 12vh;
-  }
-}
-
-.block-container-row-center {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  font-size: 2em;
-  height: 4%;
-
-  span {
-    font-size: 0.5em;
-  }
+.chat-box-shadow {
+  box-shadow: inset 0 0 7px 0px lightgrey;
 }
 
 .outline-fixed-width-style {
   border-radius: 0;
   width: 15em;
 }
-.livechat-wrapper {
+.background-image {
   overflow: hidden;
 
   &:after {
@@ -187,7 +127,7 @@ export default {
   }
 }
 
-.livechat-wrapper img {
+.background-image img {
   position: absolute;
   left: 50%;
   top: 50%;
