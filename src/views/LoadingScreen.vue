@@ -13,18 +13,18 @@ import ClockLoading from "@/components/loading/ClockLoading.vue";
 export default {
   name: "LoadingScreen",
   components: {
-    ClockLoading,
+    ClockLoading
   },
   data() {
     return {
-      is_logged_in: false,
+      is_logged_in: false
     };
   },
   mounted() {
     if (localStorage.signedIn) {
       this.is_logged_in = true;
     }
-  },
+  }
 };
 </script>
 
@@ -69,14 +69,5 @@ export default {
   object-fit: cover;
   opacity: 0.9;
   z-index: -1;
-}
-
-.h-relative-6 {
-  height: 6em;
-}
-
-.calculated-subject-row-height {
-  height: calc(50% - 3em);
-  width: 100%;
 }
 </style>

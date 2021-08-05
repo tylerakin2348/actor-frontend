@@ -1,19 +1,19 @@
 <template>
-  <div class="block-container d-flex flex-wrap align-items-end">
-    <div class="block-container-row large-breakup-border col-12 col-md-5 p-0">
+  <bordered-left-title-style-container>
+    <bordered-left-title-column>
       <PageTitleBlock page_title="About Tyler" classes="h1" />
       <GoBackNavigationList>
         <GoBackLinkListItem>
           <GoBackLink url="/" link_text="Back to Home" />
         </GoBackLinkListItem>
       </GoBackNavigationList>
-    </div>
+    </bordered-left-title-column>
+
     <scrolling-data-container>
       <div class="about-page-wrapper col-12 h2">
-        A recurring membcer of the CenterStage company. And a trained vocalist.
-        Outside of theatre and music in general, Tyler is a software developer
-        in Louisville, Kentuky. He builds websites like the one holding the
-        words you are reading.
+        A recurring member of the CenterStage company. And a trained vocalist. Outside of theatre
+        and music in general, Tyler is a software developer in Louisville, Kentuky. He builds
+        websites like the one holding the words you are reading.
         <br />
         <br />
         Vocal Experience includes:
@@ -23,7 +23,7 @@
         </ul>
       </div>
     </scrolling-data-container>
-  </div>
+  </bordered-left-title-style-container>
 </template>
 <script>
 /* eslint-disable */
@@ -32,16 +32,20 @@ import GoBackLink from "@/components/common/go-back/GoBackLink.vue";
 import GoBackLinkListItem from "@/components/common/go-back/GoBackLinkListItem.vue";
 import GoBackNavigationList from "@/components/common/go-back/GoBackNavigationList.vue";
 import ScrollingDataContainer from "@/components/layout-containers/ScrollingDataContainer.vue";
+import BorderedLeftTitleColumn from "@/components/layout-containers/BorderedLeftTitleColumn.vue";
+import BorderedLeftTitleStyleContainer from "@/components/layout-containers/BorderedLeftTitleStyleContainer.vue";
 
 export default {
-  name: "Page Title Block",
+  name: "AboutPage",
   components: {
     PageTitleBlock,
     GoBackLink,
     GoBackLinkListItem,
     GoBackNavigationList,
-    ScrollingDataContainer
-  },
+    ScrollingDataContainer,
+    BorderedLeftTitleColumn,
+    BorderedLeftTitleStyleContainer
+  }
 };
 </script>
 

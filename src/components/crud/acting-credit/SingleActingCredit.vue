@@ -1,5 +1,5 @@
 <template>
-  <single-db-entry-container>
+  <div class="single_item">
     <div class="flex items-center justify-between flex-wrap">
       <div class="single-acting-credit-wrapper flex-1 flex justify-between flex-wrap">
         <article class="block font-mono font-semibold flex items-center">
@@ -51,13 +51,12 @@
         modal_id="remove-acting-credit-modal"
       />
     </div>
-  </single-db-entry-container>
+  </div>
 </template>
 
 <script>
 import UpdateActingCredit from "@/components/crud/acting-credit/UpdateActingCredit.vue";
 import RemoveActingCredit from "@/components/crud/acting-credit/RemoveActingCredit.vue";
-import SingleDbEntryContainer from "@/components/layout-containers/SingleDbEntryContainer.vue";
 
 export default {
   props: {
@@ -74,8 +73,7 @@ export default {
   },
   components: {
     UpdateActingCredit,
-    RemoveActingCredit,
-    SingleDbEntryContainer
+    RemoveActingCredit
   },
   data() {
     return {
@@ -116,14 +114,6 @@ export default {
 .credit-row {
   display: flex;
   flex-direction: column;
-}
-.single_acting_credit {
-  list-style: none;
-  padding: 1em 0;
-
-  &:last-of-type {
-    border-bottom: 0;
-  }
 }
 
 .single-acting-credit-wrapper {

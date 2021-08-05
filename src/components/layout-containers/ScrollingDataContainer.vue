@@ -1,5 +1,5 @@
 <template>
-    <div class="overflow-scroll-container block-container-row col-12 col-md-7 justify-content-start" component_classes="align-content-center">
+    <div class="overflow-scroll-container block-container-row col-12 col-md-7 justify-content-start" :class="component_classes">
       <div class="data-content-wrapper">
         <slot></slot>
       </div>
@@ -7,7 +7,6 @@
 </template>
 
 <script>
-
 export default {
   name: "Scrolling Data Container",
    props: {
@@ -18,7 +17,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @media screen and (min-width: 769px) {
   .block-container-row {
     align-items: flex-end;

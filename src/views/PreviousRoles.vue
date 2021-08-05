@@ -8,17 +8,11 @@
         </GoBackLinkListItem>
       </GoBackNavigationList>
     </bordered-left-title-column>
-    <scrolling-data-container>
-      <!-- <div class="acting-credit-wrapper col-12"> -->
-        <ClockLoading color_scheme="color-scheme-dark" v-if="is_loading" />
-        <SingleActingCredit
-          v-else
-          v-for="acting_credit in acting_credits"
-          :key="acting_credit.id"
-          :acting_credit="acting_credit"
-          :can_edit="false"
-        />
-      <!-- </div> -->
+    <ClockLoading color_scheme="color-scheme-dark" v-if="is_loading" />
+    <scrolling-data-container v-else>
+      <single-db-entry-container v-for="acting_credit in acting_credits" :key="acting_credit.id">
+        <SingleActingCredit :acting_credit="acting_credit" :can_edit="false" />
+      </single-db-entry-container>
     </scrolling-data-container>
   </bordered-left-title-style-container>
 </template>
@@ -33,10 +27,11 @@ import GoBackNavigationList from "@/components/common/go-back/GoBackNavigationLi
 import ClockLoading from "@/components/loading/ClockLoading.vue";
 import ScrollingDataContainer from "@/components/layout-containers/ScrollingDataContainer.vue";
 import BorderedLeftTitleColumn from "@/components/layout-containers/BorderedLeftTitleColumn.vue";
-import BorderedLeftTitleStyleContainer from '../components/layout-containers/BorderedLeftTitleStyleContainer.vue';
+import BorderedLeftTitleStyleContainer from "@/components/layout-containers/BorderedLeftTitleStyleContainer.vue";
+import SingleDbEntryContainer from "@/components/layout-containers/SingleDbEntryContainer.vue";
 
 export default {
-  name: "Upcoming Events",
+  name: "PreviousRoles",
   components: {
     PageTitleBlock,
     SingleActingCredit,
@@ -46,7 +41,8 @@ export default {
     ClockLoading,
     ScrollingDataContainer,
     BorderedLeftTitleColumn,
-    BorderedLeftTitleStyleContainer
+    BorderedLeftTitleStyleContainer,
+    SingleDbEntryContainer
   },
   data() {
     return {
@@ -54,7 +50,7 @@ export default {
       name: [],
       relationship: [],
       errors: [],
-      is_loading: true,
+      is_loading: true
     };
   },
   created() {
@@ -65,7 +61,7 @@ export default {
         console.log(response);
 
         // setTimeout(() => {
-          this.is_loading = false;
+        this.is_loading = false;
         // }, 13000);
       })
       .catch(e => {
@@ -75,32 +71,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.acting-credit-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  @media screen and (min-width: 769px) {
-    justify-content: flex-start;
-  }
-  .single-db-entry-container {
-    @media screen and (min-width: 769px) {
-      width: 50%;
-    }
-  }
-}
-
-@media screen and (min-width: 769px) {
-  .block-container {
-    height: 100vh;
-  }
-}
-
-@media screen and (min-width: 769px) {
-  .block-container {
-    height: 100vh;
-  }
-
-}
-</style>
+<style lang="scss" scoped></style>

@@ -1,6 +1,6 @@
 <template>
-  <div class="block-container d-flex flex-wrap align-items-end">
-    <div class="block-container-row large-breakup-border col-12 col-md-5 p-0">
+  <bordered-left-title-style-container>
+    <bordered-left-title-column>
       <PageTitleBlock page_title="Update An Existing Event" classes="h1" />
       <GoBackNavigationList>
         <GoBackLinkListItem>
@@ -13,23 +13,21 @@
           <GoBackLink url="/" link_text="Back to Home" />
         </GoBackLinkListItem>
       </GoBackNavigationList>
-    </div>
+    </bordered-left-title-column>
     <scrolling-data-container>
       <div class="text-red" v-if="error">{{ error }}</div>
-      <div class="event-wrapper col-12">
+      <single-db-entry-container v-for="event in events" :key="event.id">
         <SingleEvent
-          v-for="event in events"
-          :key="event.id"
           :eventCurrentlyBeingEdited="eventCurrentlyBeingEdited"
           :event="event"
           :can_edit="true"
           :stagedForDeletion="stagedForDeletion"
-          v-on:set-event-being-edited="setEventBeingEdited"
-          v-on:stage-event-for-deletion="stageEventForDeletion"
+          @set-event-being-edited="setEventBeingEdited"
+          @stage-event-for-deletion="stageEventForDeletion"
         />
-      </div>
+      </single-db-entry-container>
     </scrolling-data-container>
-  </div>
+  </bordered-left-title-style-container>
 </template>
 
 <script>
@@ -39,6 +37,9 @@ import GoBackLink from "@/components/common/go-back/GoBackLink.vue";
 import GoBackLinkListItem from "@/components/common/go-back/GoBackLinkListItem.vue";
 import GoBackNavigationList from "@/components/common/go-back/GoBackNavigationList.vue";
 import ScrollingDataContainer from "@/components/layout-containers/ScrollingDataContainer.vue";
+import BorderedLeftTitleColumn from "@/components/layout-containers/BorderedLeftTitleColumn.vue";
+import BorderedLeftTitleStyleContainer from "@/components/layout-containers/BorderedLeftTitleStyleContainer.vue";
+import SingleDbEntryContainer from "@/components/layout-containers/SingleDbEntryContainer.vue";
 
 export default {
   name: "AdminEvents",
@@ -49,6 +50,9 @@ export default {
     GoBackLinkListItem,
     GoBackNavigationList,
     ScrollingDataContainer,
+    BorderedLeftTitleColumn,
+    BorderedLeftTitleStyleContainer,
+    SingleDbEntryContainer
   },
   data() {
     return {
@@ -57,107 +61,31 @@ export default {
       error: "",
       eventCurrentlyBeingEdited: null,
       stagedForDeletion: null,
-      addNewEvent: false,
+      addNewEvent: false
     };
   },
   created() {
     this.$http.secured
       .get(`${this.$availableEndpoints.events}`)
-      .then((response) => {
+      .then(response => {
         this.events = response.data;
       })
-      .catch((error) => this.setError(error, "Something went wrong"));
+      .catch(error => this.setError(error, "Something went wrong"));
   },
   methods: {
-    setEventBeingEdited: function (event) {
+    setEventBeingEdited: function(event) {
       this.eventCurrentlyBeingEdited = event;
       console.log("hello from edited event", event);
     },
-    stageEventForDeletion: function (event) {
+    stageEventForDeletion: function(event) {
       this.stagedForDeletion = event;
       console.log("hello from delte event");
     },
     setError(error, text) {
-      this.error =
-        (error.response && error.response.data && error.response.data.error) ||
-        text;
-    },
-  },
+      this.error = (error.response && error.response.data && error.response.data.error) || text;
+    }
+  }
 };
 </script>
 
-
-<style lang="scss" scoped>
-.event-wrapper {
-  padding-top: 1em;
-  text-align: left;
-
-  .single_acting_credit {
-    @media screen and (min-width: 769px) {
-      width: 50%;
-    }
-  }
-}
-.large-breakup-border {
-  padding: 0;
-}
-
-.large-breakup-border:after {
-  background-color: rgba(200, 139, 139, 1);
-  content: "";
-  display: inline-block;
-  height: 0.75em;
-  width: 100%;
-
-  @media screen and (min-width: 769px) {
-    height: 85%;
-    width: 1.5em;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-}
-
-@media screen and (min-width: 769px) {
-  .block-container {
-    height: 100vh;
-  }
-}
-
-.block-container-row {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
-}
-
-@media screen and (min-width: 769px) {
-  .block-container {
-    height: 100vh;
-  }
-
-  .block-container-row {
-    align-items: center;
-  }
-}
-
-.block-container-row-center {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  font-size: 2em;
-  height: 4%;
-
-  span {
-    font-size: 0.5em;
-  }
-}
-
-.outline-fixed-width-style {
-  border-radius: 0;
-  width: 15em;
-}
-</style>
+<style lang="scss" scoped></style>

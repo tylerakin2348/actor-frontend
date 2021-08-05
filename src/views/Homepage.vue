@@ -1,10 +1,6 @@
 <template>
   <div id="do-not-scroll-on-mobile">
-    <div
-      :class="
-        current_chat_status ? 'homepage-wrapper active-chat' : 'homepage-wrapper'
-      "
-    >
+    <div :class="current_chat_status ? 'homepage-wrapper active-chat' : 'homepage-wrapper'">
       <img :src="require(`@/assets/next-to-normal/next_to_normal18.jpg`)" />
       <layout-row class="calculated-subject-row-height justify-content-between">
         <SubjectBlockClear
@@ -27,9 +23,7 @@
           class="d-flex align-items-center justify-content-center flex-column col-12"
           v-if="current_chat_status"
         >
-          <div
-            class="d-flex align-items-center justify-content-center flex-column col-12"
-          >
+          <div class="d-flex align-items-center justify-content-center flex-column col-12">
             <span class="h2">Tyler Akin</span>
           </div>
           <router-link
@@ -85,20 +79,13 @@ export default {
     LayoutRow,
     LayoutColumn,
     AdminAccess,
-    LiveChatMessage,
+    LiveChatMessage
   },
   data() {
-    return {
-      is_logged_in: false,
-      chat_is_active: false,
-    };
+    return {};
   },
 
   mounted() {
-    if (localStorage.signedIn) {
-      this.is_logged_in = true;
-    }
-
     let setUpLiveChatScripts = new IntervalLifecycle(this.checkForNewMessage);
     this.checkForNewMessage();
 
@@ -110,18 +97,21 @@ export default {
   computed: {
     current_chat_status: function() {
       return this.$store.getters.currentChatStatus;
+    },
+    is_logged_in: function() {
+      return this.$store.getters.isLoggedIn;
     }
   },
   methods: {
-    checkForNewMessage: function () {
+    checkForNewMessage: function() {
       this.$http.secured
         .get(`${this.$availableEndpoints.live_chat}`)
-        .then((response) => {
-          checkForAvailableData(this, response, 'updateChatStatus');
+        .then(response => {
+          checkForAvailableData(this, response, "updateChatStatus");
         })
-        .catch((error) => this.setError(error, "Something went wrong"));
-    },
-  },
+        .catch(error => console.log(error));
+    }
+  }
 };
 </script>
 

@@ -1,25 +1,30 @@
 <template>
-  <router-link class="admin_dashboard_link" :to="{ path: admin_dashboard_url }">
-    {{current_user}} - Admin Dashboard
-  </router-link>
+  <absolutely-positioned-container component_classes="bottom right">
+    <router-link class="admin_dashboard_link" :to="{ path: admin_dashboard_url }">
+      {{ current_user }} - Admin Dashboard
+    </router-link>
+  </absolutely-positioned-container>
 </template>
 
 <script>
+import AbsolutelyPositionedContainer from "@/components/layout-containers/AbsolutelyPositionedContainer.vue";
+
 export default {
-  name: "Subject Block",
-  props: [],
+  name: "AdminDashboardLink",
+  components: {
+    AbsolutelyPositionedContainer
+  },
 
   data() {
     return {
-      admin_dashboard_url: "/admin",
-      // msg: 'Welcome to Your Vue.js App',
+      admin_dashboard_url: "/admin"
     };
   },
   computed: {
     current_user: function() {
-      return this.$store.getters.currentUser
+      return this.$store.getters.currentUser;
     }
-  },
+  }
 };
 </script>
 
@@ -28,9 +33,6 @@ export default {
 .admin_dashboard_link {
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
-  position: absolute;
-  right: 0%;
   padding: 1em;
-  bottom: 0;
 }
 </style>

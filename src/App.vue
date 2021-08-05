@@ -7,23 +7,17 @@
 
 <script>
 import LoadingScreen from "@/views/LoadingScreen.vue";
-import shouldNotBeVisitingAdminScreen from "@/helpers/shouldNotBeVisitingAdminScreen.js"
 export default {
   components: {
-    LoadingScreen,
+    LoadingScreen
   },
   data: () => {
     return {
-      is_loading: false,
+      is_loading: false
     };
   },
 
-  beforeUpdate() {},
-
-  created() {},
-
   mounted() {
-  
     if (window.history.length < 3) {
       this.is_loading = true;
       this.setUpLoadingEffectTimer();
@@ -31,31 +25,17 @@ export default {
       this.is_loading = false;
     }
   },
- 
+
   methods: {
-    
     setUpLoadingEffectTimer() {
       setTimeout(() => {
         this.is_loading = false;
       }, 5000);
     },
     setError(error, text) {
-      this.error =
-        (error.response && error.response.data && error.response.data.error) ||
-        text;
-    },
-  
-    signOut() {
-      this.$http.secured
-        .delete("/signin")
-        .then((response) => {
-          delete localStorage.csrf;
-          delete localStorage.signedIn;
-          this.$router.replace("/");
-        })
-        .catch((error) => this.setError(error, "Cannot sign out"));
-    },
-  },
+      this.error = (error.response && error.response.data && error.response.data.error) || text;
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

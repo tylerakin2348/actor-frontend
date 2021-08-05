@@ -1,102 +1,112 @@
-<!-- recordstore-frontend/src/components/Signin.vue -->
-
 <template>
-
-  <div class="block-container h-100 d-flex">
-    <div class="block-container-row align-items-start h-100 flex-column
-    justify-content-start w-50 pr-2">
-      <SubjectBlock
-        link_url="/"
-        link_image_src="assets/next-to-normal/next_to_normal1.jpg"
-        link_text_line_1="Go back"
-        link_text_line_2="home"
-        classes="top-left h-25 w-100"
-      />
-      <PageTitleBlock page_title="Sign In" classes="h-auto h1 pt-5" />
-    </div>
-    <div class="block-container-row h-100 py-5 align-items-start text-align-left
-    px-5 font-weight-normal overflow-auto">      
-    <h3 class="text-2xl mb-6 text-grey-darkest">Sign In</h3>
+  <bordered-left-title-style-container>
+    <bordered-left-title-column>
+      <PageTitleBlock page_title="Admin - Sign in" classes="h1" />
+      <GoBackNavigationList>
+        <GoBackLinkListItem>
+          <GoBackLink url="/" link_text="Back to Home" />
+        </GoBackLinkListItem>
+      </GoBackNavigationList>
+    </bordered-left-title-column>
+    <centered-management-navigation>
+      <h3 class="text-2xl mb-6 text-grey-darkest">Sign In</h3>
       <form @submit.prevent="signin">
         <div class="text-red" v-if="error">{{ error }}</div>
 
         <div class="mb-6">
           <label for="email" class="label w-100">E-mail Address</label>
-          <input type="email" v-model="email" class="input" id="email" placeholder="andy@web-crunch.com">
+          <input
+            type="email"
+            v-model="email"
+            class="input"
+            id="email"
+            placeholder="andy@web-crunch.com"
+          />
         </div>
         <div class="mb-6">
           <label for="password" class="label w-100">Password</label>
-          <input type="password" v-model="password" class="input" id="password" placeholder="Password">
+          <input
+            type="password"
+            v-model="password"
+            class="input"
+            id="password"
+            placeholder="Password"
+          />
         </div>
-        <button type="submit" class="font-sans font-bold px-4 rounded cursor-pointer no-underline bg-green hover:bg-green-dark block w-full py-4 text-white items-center justify-center">Sign In</button>
-
-        <div class="my-4"><router-link to="/signup" class="link-grey">Sign up</router-link></div>
+        <button type="submit" class="btn btn-primary mt-2">
+          Sign In
+        </button>
       </form>
-    </div>
-  </div>
+      <absolutely-positioned-container component_classes="bottom right">
+        <router-link to="/signup" class="btn btn-outline-secondary">Sign up</router-link>
+      </absolutely-positioned-container>
+    </centered-management-navigation>
+  </bordered-left-title-style-container>
 </template>
 
 <script>
-
-import SubjectBlock from '@/components/homepage/SubjectBlock.vue';
-import PageTitleBlock from '@/components/common/PageTitleBlock.vue';
-import LayoutRow from '@/components/layout-containers/LayoutRow.vue';
-import LayoutColumn from '@/components/layout-containers/LayoutColumn.vue';
-import SingleActingCredit from '@/components/crud/acting-credit/SingleActingCredit.vue';
+import PageTitleBlock from "@/components/common/PageTitleBlock.vue";
+import GoBackLink from "@/components/common/go-back/GoBackLink.vue";
+import GoBackLinkListItem from "@/components/common/go-back/GoBackLinkListItem.vue";
+import GoBackNavigationList from "@/components/common/go-back/GoBackNavigationList.vue";
+import CenteredManagementNavigation from "@/components/layout-containers/CenteredManagementNavigation.vue";
+import BorderedLeftTitleColumn from "@/components/layout-containers/BorderedLeftTitleColumn.vue";
+import BorderedLeftTitleStyleContainer from "@/components/layout-containers/BorderedLeftTitleStyleContainer.vue";
+import AbsolutelyPositionedContainer from "@/components/layout-containers/AbsolutelyPositionedContainer.vue";
 
 export default {
-name: 'Signin',
-components: {
-    SubjectBlock,
+  name: "SigninPage",
+  components: {
     PageTitleBlock,
-    LayoutRow,
-    LayoutColumn,
-    SingleActingCredit,
+    GoBackLink,
+    GoBackLinkListItem,
+    GoBackNavigationList,
+    CenteredManagementNavigation,
+    BorderedLeftTitleColumn,
+    BorderedLeftTitleStyleContainer,
+    AbsolutelyPositionedContainer
   },
-  data () {
+  data() {
     return {
-      email: '',
-      password: '',
-      error: ''
-    }
+      email: "",
+      password: "",
+      error: ""
+    };
   },
-  created () {
-    this.checkSignedIn()
-  },
-  updated () {
-    this.checkSignedIn()
-  },
-  methods: {
-    signin () {
-      this.$http.plain.post(`${this.$availableEndpoints.signin}`, { 
-        email: this.email, 
-        password: this.password 
-      })
-      .then(response => this.signinSuccessful(response))
-      .catch(error => this.signinFailed(error))
-    },
-    signinSuccessful (response) { 
-      console.log(response)
-      this.$store.commit( 'set_current_user', response.data.user )
-      localStorage.signedIn = true
-      this.error = ''
-      this.$router.replace('/admin')
-    },
-    signinFailed (error) {
-      console.log('asdf')
-      if (error.response.status === 401) {
-        this.error = "Invalid email or password"
-      } else {
-        this.error = (error.response && error.response.data && error.response.data.error) || ''
-      }
 
-      delete localStorage.signedIn
+  methods: {
+    signin() {
+      this.$http.plain
+        .post(`${this.$availableEndpoints.signin}`, {
+          email: this.email,
+          password: this.password
+        })
+        .then(response => this.signinSuccessful(response))
+        .catch(error => this.signinFailed(error));
     },
-    checkSignedIn () {
-      if (localStorage.signedIn) {
-        this.$router.replace('/admin')
+    signinSuccessful(response) {
+      console.log(response);
+      this.$store.commit("set_current_user", response.data.user);
+      this.$store.commit("set_logged_in_status", true);
+      this.error = "";
+      this.$router.replace("/");
+    },
+    signinFailed(error) {
+      console.log("asdf");
+      if (error.response.status === 401) {
+        this.error = "Invalid email or password";
+      } else {
+        this.error = (error.response && error.response.data && error.response.data.error) || "";
       }
     }
   }
-}
+};
 </script>
+
+<style lang="scss" scoped>
+.signup-button {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+}
+</style>

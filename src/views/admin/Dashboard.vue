@@ -4,11 +4,7 @@
       <PageTitleBlock page_title="Dashboard" classes="h1" />
       <GoBackNavigationList>
         <GoBackLinkListItem>
-          <GoBackLink
-            url="/"
-            link_text="Back to Home"
-            include_as_list_item="true"
-          />
+          <GoBackLink url="/" link_text="Back to Home" include_as_list_item="true" />
         </GoBackLinkListItem>
       </GoBackNavigationList>
     </div>
@@ -70,11 +66,11 @@ export default {
     LayoutColumn,
     GoBackLink,
     GoBackLinkListItem,
-    GoBackNavigationList,
+    GoBackNavigationList
   },
 
   mounted() {
-    console.log(this.$store.getters.currentUser)
+    console.log(this.$store.getters.currentUser);
     //  this.$http.secured
     //     .get(`${this.$properApiURL}/api/v1/auth/logout`)
     //     .then((response) => {
@@ -82,22 +78,23 @@ export default {
     //       this.$router.replace("/");
     //     })
     //     .catch((error) => this.setError(error, "Cannot sign out"));
-        
-        // localStorage.currentUser = {
-      //   response
-      // }
+
+    // localStorage.currentUser = {
+    //   response
+    // }
   },
   methods: {
     signOut() {
       this.$http.secured
         .get(`${this.$availableEndpoints.logout}`)
-        .then((response) => {
-          delete localStorage.signedIn;
+        .then(response => {
+          this.$store.commit("set_current_user", null);
+          this.$store.commit("set_logged_in_status", false);
           this.$router.replace("/");
         })
-        .catch((error) => this.setError(error, "Cannot sign out"));
-    },
-  },
+        .catch(error => this.setError(error, "Cannot sign out"));
+    }
+  }
 };
 </script>
 

@@ -1,23 +1,24 @@
 <template>
-  <div class="block-container d-flex flex-wrap align-items-end">
-    <div class="block-container-row large-breakup-border col-12 col-md-5 p-0">
+  <bordered-left-title-style-container>
+    <bordered-left-title-column>
       <PageTitleBlock page_title="Upcoming Events" classes="h1" />
       <GoBackNavigationList>
         <GoBackLinkListItem>
           <GoBackLink url="/" link_text="Back to Home" />
         </GoBackLinkListItem>
       </GoBackNavigationList>
-    </div>
-    <scrolling-data-container>
-      <div class="event-wrapper col-12" v-if="events">
-        <SingleEvent :event="event" :can_edit="false" v-for="event in events" :key="event.id" />
-      </div>
-      <div class="event-wrapper col-12" v-else>
-        I must be taking a break. <br />
-        Stay tuned for new event announcements soon!
-      </div>
+    </bordered-left-title-column>
+
+    <scrolling-data-container v-if="events">
+      <single-db-entry-container v-for="event in events" :key="event.id">
+        <SingleEvent :event="event" :can_edit="false" />
+      </single-db-entry-container>
     </scrolling-data-container>
-  </div>
+    <scrolling-data-container v-else>
+      I must be taking a break. <br />
+      Stay tuned for new event announcements soon!
+    </scrolling-data-container>
+  </bordered-left-title-style-container>
 </template>
 <script>
 /* eslint-disable */
@@ -28,16 +29,22 @@ import GoBackLink from "@/components/common/go-back/GoBackLink.vue";
 import GoBackLinkListItem from "@/components/common/go-back/GoBackLinkListItem.vue";
 import GoBackNavigationList from "@/components/common/go-back/GoBackNavigationList.vue";
 import ScrollingDataContainer from "@/components/layout-containers/ScrollingDataContainer.vue";
+import BorderedLeftTitleColumn from "@/components/layout-containers/BorderedLeftTitleColumn.vue";
+import BorderedLeftTitleStyleContainer from "@/components/layout-containers/BorderedLeftTitleStyleContainer.vue";
+import SingleDbEntryContainer from "@/components/layout-containers/SingleDbEntryContainer.vue";
 
 export default {
-  name: "Page Title Block",
+  name: "UpcomingEvents",
   components: {
     PageTitleBlock,
     SingleEvent,
     GoBackLink,
     GoBackLinkListItem,
     GoBackNavigationList,
-    ScrollingDataContainer
+    ScrollingDataContainer,
+    BorderedLeftTitleColumn,
+    BorderedLeftTitleStyleContainer,
+    SingleDbEntryContainer
   },
   data() {
     return {
@@ -61,79 +68,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.event-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  .single_event_item {
-    width: 100%;
-  }
-  @media screen and (min-width: 769px) {
-    justify-content: flex-start;
-  }
-  .single_event_item {
-    @media screen and (min-width: 769px) {
-      width: 50%;
-    }
-  }
-}
-.large-breakup-border {
-  padding: 0;
-}
-
-.large-breakup-border:after {
-  background-color: rgba(200, 139, 139, 1);
-  content: "";
-  display: inline-block;
-  height: 0.75em;
-  width: 100%;
-
-  @media screen and (min-width: 769px) {
-    height: 85%;
-    width: 1.5em;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-}
-
-@media screen and (min-width: 769px) {
-  .block-container {
-    height: 100vh;
-  }
-}
-
-.block-container-row {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
-}
-
-@media screen and (min-width: 769px) {
-  .block-container {
-    height: 100vh;
-  }
-
-  .block-container-row {
-    align-items: center;
-  }
-}
-
-.block-container-row-center {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  font-size: 2em;
-  height: 4%;
-
-  span {
-    font-size: 0.5em;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

@@ -1,55 +1,39 @@
 <template>
-  <div class="block-container h-100">
-    Test 404
-  </div>
+  <bordered-left-title-style-container>
+    <bordered-left-title-column>
+      <PageTitleBlock page_title="404 Page" classes="h1" />
+      <GoBackNavigationList>
+        <GoBackLinkListItem>
+          <GoBackLink url="/" link_text="Back to Home" />
+        </GoBackLinkListItem>
+      </GoBackNavigationList>
+    </bordered-left-title-column>
+    <centered-management-navigation>
+      <span class="h1">Oops! Nothing Here.</span> <br />
+      <span class="h3">You must've found a page I haven't created yet.</span> <br />
+    </centered-management-navigation>
+  </bordered-left-title-style-container>
 </template>
 <script>
 /* eslint-disable */
-import SubjectBlock from '@/components/homepage/SubjectBlock.vue';
-import PageTitleBlock from '@/components/common/PageTitleBlock.vue';
-import LayoutRow from '@/components/layout-containers/LayoutRow.vue';
-import LayoutColumn from '@/components/layout-containers/LayoutColumn.vue';
+import PageTitleBlock from "@/components/common/PageTitleBlock.vue";
+import GoBackLink from "@/components/common/go-back/GoBackLink.vue";
+import GoBackLinkListItem from "@/components/common/go-back/GoBackLinkListItem.vue";
+import GoBackNavigationList from "@/components/common/go-back/GoBackNavigationList.vue";
+import BorderedLeftTitleColumn from "@/components/layout-containers/BorderedLeftTitleColumn.vue";
+import BorderedLeftTitleStyleContainer from "@/components/layout-containers/BorderedLeftTitleStyleContainer.vue";
+import CenteredManagementNavigation from "@/components/layout-containers/CenteredManagementNavigation.vue";
 
 export default {
-  name: 'Contact Me',
+  name: "404Page",
   components: {
-    SubjectBlock,
     PageTitleBlock,
-    LayoutRow,
-    LayoutColumn,
-  },
+    GoBackLink,
+    GoBackLinkListItem,
+    GoBackNavigationList,
+    BorderedLeftTitleColumn,
+    BorderedLeftTitleStyleContainer,
+    CenteredManagementNavigation
+  }
 };
 </script>
-
-<style lang="scss" scoped>
-  .block-container {
-    //  display: flex;
-    // flex-wrap: wrap;
-    // justify-content: space-between;
-    // height: 100vh;
-    // padding: 1em;
-  }
-
-  .block-container-row {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 48%;
-  }
-
-  .block-container-row-center {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    font-size: 2em;
-    height: 4%;
-
-    span {
-      font-size: .5em;
-    }
-  }
-
-</style>

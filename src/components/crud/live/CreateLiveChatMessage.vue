@@ -16,15 +16,8 @@
           />
         </div>
         <br />
-        <input
-          type="submit"
-          value="Create"
-          class="bg-transparent text-sm hover:bg-blue hover:text-white text-blue border border-blue no-underline font-bold py-2 px-4 mr-2 rounded"
-        />
-        <button
-          class="bg-transparent text-sm hover:bg-blue hover:text-white text-blue border border-blue no-underline font-bold py-2 px-4 mr-2 rounded"
-          @click="destroyChat()"
-        >
+        <input type="submit" value="Create" class="btn btn-outline-secondary mr-2" />
+        <button type="button" class="btn btn-outline-secondary" @click="destroyChat()">
           End Live Chat
         </button>
       </div>
@@ -40,17 +33,12 @@ export default {
     return {
       liveChats: [],
       message: "",
-      error: "",
+      error: ""
     };
   },
   mounted() {},
 
   methods: {
-    setError(error, text) {
-      this.error =
-        (error.response && error.response.data && error.response.data.error) ||
-        text;
-    },
     addNewChat() {
       const value = this.message;
       if (!value) {
@@ -63,13 +51,13 @@ export default {
           message_author: this.$store.getters.currentUser
         })
 
-        .then((response) => {
+        .then(response => {
           this.liveChats.push(response.data);
           this.message = "";
           this.$emit("check-messages");
-          this.$store.commit('chat_is_active', true);
+          this.$store.commit("updateChatStatus", true);
         })
-        .catch((error) => this.setError(error, "Cannot create chat"));
+        .catch(error => console.log(error));
     },
 
     destroyChat() {
@@ -80,26 +68,24 @@ export default {
       // loop to delete each available message one at a time.
       let messages = this.$props.available_chat_messages;
 
-      if (! messages.length > 0) {
-        this.$router.replace('/admin/live');
-      }
-
-      messages.forEach((message) => {
+      messages.forEach(message => {
         this.stagedForDeletion = "";
         this.$http.secured
           .delete(`${this.$availableEndpoints.live_chat}/${message._id}`)
-          .then((response) => {
+          .then(response => {
             this.$emit("check-messages");
           })
-          .catch((error) => this.setError(error, "Cannot delete record"));
+          .catch(error => console.log(error));
       });
 
-      if (messages.length < 1) {
-          this.$router.replace('/admin/live');
-          this.$store.commit('chat_is_active', false);
-      }
-    },
-  },
+      setTimeout(() => {
+        if (messages.length === 0) {
+          this.$router.replace("/admin/live");
+          this.$store.commit("updateChatStatus", false);
+        }
+      }, 3000);
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
