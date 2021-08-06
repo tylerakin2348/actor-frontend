@@ -19,7 +19,7 @@
         <b class="contact-row-title">email:</b>
         <a href="mail:tylerakinmwc@gmail.com">tylerakinmwc@gmail.com</a>
       </div>
-      <a class="tylerakin_dot_com_link" href="https://tylerakin.com/">
+      <a class="tylerakin_dot_com_link" href="http://tylerakin.com/">
         a tylerakin.com site
       </a>
       <span class="copyright_signal"> All rights reserved {{ theCurrentDate }}</span>

@@ -68,6 +68,9 @@ export default {
       .catch(e => {
         this.error.push(e);
       });
+  },
+  beforeDestroy() {
+    this.$store.commit("set_content_loading_status", false);
   }
 };
 </script>

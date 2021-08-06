@@ -6,15 +6,15 @@
 
 <script>
 export default {
-  name: "Single DB Entry Container",
+  name: "SingleDBEntryContainer"
 };
 </script>
 
 <style lang="scss" scoped>
-    .single-db-entry-container {
-        width: 100%;
-        @media screen and (min-width: 769px) {
-            width: 50%;
-        }
-    }
+.single-db-entry-container {
+  width: 100%;
+  @media screen and (min-width: 769px) {
+    width: 50%;
+  }
+}
 </style>

@@ -54,10 +54,12 @@ export default {
     };
   },
   created() {
+    this.$store.commit("set_content_loading_status", true);
     axios
       .get(`${this.$availableEndpoints.events}`)
       .then(response => {
         this.events = response.data;
+        this.$store.commit("set_content_loading_status", false);
 
         if (this.events.length < 1) {
           this.events = null;
@@ -66,6 +68,9 @@ export default {
       .catch(e => {
         this.error.push(e);
       });
+  },
+  beforeDestroy() {
+    this.$store.commit("set_content_loading_status", false);
   }
 };
 </script>
