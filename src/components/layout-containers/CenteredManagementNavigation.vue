@@ -1,6 +1,6 @@
 <template>
   <div
-    class="centered-management-navigation block-container-row col-12 col-md-7 justify-content-center"
+    class="centered-management-navigation block-container-row col-12 col-md-7 justify-content-center align-content-center"
     :class="component_classes"
   >
     <div class="centered-management-navigation--inner">

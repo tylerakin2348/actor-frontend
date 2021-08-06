@@ -7,9 +7,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 require("@/assets/css/bootstrap-override.css");
 import VueAxios from "vue-axios";
 import { securedAxiosInstance, plainAxiosInstance } from "./backend/axios";
-import store from './AppStore';
+import store from "./AppStore";
 import determinedDatabaseURL from "./helpers/determinedDatabaseURL";
 import availableEndpoints from "../src/backend/axios/availableEndpoints";
+import Fragment from "vue-fragment";
+Vue.use(Fragment.Plugin);
 
 Vue.prototype.$properApiURL = determinedDatabaseURL();
 Vue.prototype.$availableEndpoints = availableEndpoints;
@@ -29,4 +31,3 @@ const theApp = new Vue({
   router,
   render: h => h(App)
 }).$mount("#app");
-

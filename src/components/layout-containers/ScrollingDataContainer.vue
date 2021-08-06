@@ -1,19 +1,40 @@
 <template>
-    <div class="overflow-scroll-container block-container-row col-12 col-md-7 justify-content-start" :class="component_classes">
+  <fragment>
+    <div
+      v-if="!content_is_loading"
+      class="overflow-scroll-container block-container-row col-12 col-md-7 justify-content-start"
+      :class="component_classes"
+    >
       <div class="data-content-wrapper">
         <slot></slot>
       </div>
     </div>
+    <centered-management-navigation v-else>
+      <ClockLoading component_classes="color-scheme-dark small-clock" />
+    </centered-management-navigation>
+  </fragment>
 </template>
 
 <script>
+import CenteredManagementNavigation from "@/components/layout-containers/CenteredManagementNavigation.vue";
+import ClockLoading from "@/components/loading/ClockLoading.vue";
+
 export default {
-  name: "Scrolling Data Container",
-   props: {
+  name: "ScrollingDataContainer",
+  props: {
     component_classes: {
-      type: String,
+      type: String
     }
   },
+  components: {
+    CenteredManagementNavigation,
+    ClockLoading
+  },
+  computed: {
+    content_is_loading: function() {
+      return this.$store.getters.contentIsLoading;
+    }
+  }
 };
 </script>
 

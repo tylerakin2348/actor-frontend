@@ -2,7 +2,7 @@
   <transition name="loading-screen-fade">
     <div class="homepage-wrapper align-items-center justify-content-center">
       <img :src="require(`@/assets/next-to-normal/tyler_white_out.jpg`)" />
-      <ClockLoading color_scheme="color-scheme-light" />
+      <ClockLoading component_classes="color-scheme-light" />
     </div>
   </transition>
 </template>
@@ -15,16 +15,8 @@ export default {
   components: {
     ClockLoading
   },
-  data() {
-    return {
-      is_logged_in: false
-    };
-  },
-  mounted() {
-    if (localStorage.signedIn) {
-      this.is_logged_in = true;
-    }
-  }
+  data() {},
+  mounted() {}
 };
 </script>
 

@@ -8,8 +8,10 @@
         </GoBackLinkListItem>
       </GoBackNavigationList>
     </bordered-left-title-column>
-    <ClockLoading color_scheme="color-scheme-dark" v-if="is_loading" />
-    <scrolling-data-container v-else>
+    <!-- <centered-management-navigation v-if="is_loading">
+      <ClockLoading component_classes="color-scheme-dark small-clock" />
+    </centered-management-navigation> -->
+    <scrolling-data-container>
       <single-db-entry-container v-for="acting_credit in acting_credits" :key="acting_credit.id">
         <SingleActingCredit :acting_credit="acting_credit" :can_edit="false" />
       </single-db-entry-container>
@@ -29,6 +31,7 @@ import ScrollingDataContainer from "@/components/layout-containers/ScrollingData
 import BorderedLeftTitleColumn from "@/components/layout-containers/BorderedLeftTitleColumn.vue";
 import BorderedLeftTitleStyleContainer from "@/components/layout-containers/BorderedLeftTitleStyleContainer.vue";
 import SingleDbEntryContainer from "@/components/layout-containers/SingleDbEntryContainer.vue";
+import CenteredManagementNavigation from "@/components/layout-containers/CenteredManagementNavigation.vue";
 
 export default {
   name: "PreviousRoles",
@@ -42,7 +45,8 @@ export default {
     ScrollingDataContainer,
     BorderedLeftTitleColumn,
     BorderedLeftTitleStyleContainer,
-    SingleDbEntryContainer
+    SingleDbEntryContainer,
+    CenteredManagementNavigation
   },
   data() {
     return {
@@ -54,15 +58,12 @@ export default {
     };
   },
   created() {
+    this.$store.commit("set_content_loading_status", true);
     axios
       .get(`${this.$properApiURL}/api/v1/acting-credits`)
       .then(response => {
         this.acting_credits = response.data;
-        console.log(response);
-
-        // setTimeout(() => {
-        this.is_loading = false;
-        // }, 13000);
+        this.$store.commit("set_content_loading_status", false);
       })
       .catch(e => {
         this.error.push(e);

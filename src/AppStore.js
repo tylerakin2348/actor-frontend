@@ -6,6 +6,9 @@ Vue.use(Vuex);
 const current_user_from_storage = localStorage.getItem("current_user");
 const from_storage_chat_is_active = JSON.parse(localStorage.getItem("chat_is_active"));
 const from_storage_logged_in_status = JSON.parse(localStorage.getItem("logged_in_status"));
+const from_storage_content_is_loading = JSON.parse(
+  localStorage.getItem("from_storage_content_is_loading")
+);
 
 const store = new Vuex.Store({
   state: {
@@ -13,7 +16,8 @@ const store = new Vuex.Store({
     count: 0,
     is_logged_in: from_storage_logged_in_status ? true : false,
     chat_is_active: from_storage_chat_is_active ? true : false,
-    current_user: current_user_from_storage ? current_user_from_storage : null
+    current_user: current_user_from_storage ? current_user_from_storage : null,
+    content_is_loading: from_storage_content_is_loading ? from_storage_content_is_loading : null
   },
   mutations: {
     increment(state) {
@@ -49,19 +53,18 @@ const store = new Vuex.Store({
         state.is_logged_in = false;
         localStorage.setItem("logged_in_status", JSON.stringify(loggedInStatus));
       }
+    },
+    set_content_loading_status(state, contentLoadingStatus) {
+      if (contentLoadingStatus) {
+        state.content_is_loading = true;
+        localStorage.setItem("content_is_loading", JSON.stringify(contentLoadingStatus));
+      } else {
+        state.content_is_loading = false;
+        localStorage.setItem("content_is_loading", JSON.stringify(contentLoadingStatus));
+      }
     }
   },
-  //   actions: {  getCurrentActingCredits({commit}) {
-  //     //     this.$http.secured
-  //     //     .get(`${this.$properApiURL}/api/v1/acting-credits`)
-  //     //     .then((response) => {
-  //     //     //   this.$store.commit('')
-  //     //       this.acting_credits = response.data;
-  //     //     })
-  //     //     // .catch((error) => this.setError(error, "Something went wrong"));
-  //     //   }
-  //     //
-  //   },
+
   getters: {
     currentActingCredits: state => {
       return state.acting_credits;
@@ -76,6 +79,9 @@ const store = new Vuex.Store({
     },
     isLoggedIn: state => {
       return state.is_logged_in;
+    },
+    contentIsLoading: state => {
+      return state.content_is_loading;
     }
   }
 });

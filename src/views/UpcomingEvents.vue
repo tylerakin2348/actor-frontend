@@ -32,6 +32,7 @@ import ScrollingDataContainer from "@/components/layout-containers/ScrollingData
 import BorderedLeftTitleColumn from "@/components/layout-containers/BorderedLeftTitleColumn.vue";
 import BorderedLeftTitleStyleContainer from "@/components/layout-containers/BorderedLeftTitleStyleContainer.vue";
 import SingleDbEntryContainer from "@/components/layout-containers/SingleDbEntryContainer.vue";
+import CenteredManagementNavigation from "@/components/layout-containers/CenteredManagementNavigation.vue";
 
 export default {
   name: "UpcomingEvents",
@@ -44,7 +45,8 @@ export default {
     ScrollingDataContainer,
     BorderedLeftTitleColumn,
     BorderedLeftTitleStyleContainer,
-    SingleDbEntryContainer
+    SingleDbEntryContainer,
+    CenteredManagementNavigation
   },
   data() {
     return {
