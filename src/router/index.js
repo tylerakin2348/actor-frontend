@@ -128,8 +128,6 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: "history",
-  base: "/home/tyler/projects/working/actor-frontend/dist",
   routes
 });
 
