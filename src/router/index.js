@@ -129,7 +129,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: "history",
-  base: process.env.BASE_URL ? process.env.BASE_URL : "/",
+  base: "/home/tyler/projects/working/actor-frontend/dist",
   routes
 });
 
