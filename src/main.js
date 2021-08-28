@@ -26,8 +26,11 @@ Vue.use(VueAxios, {
   plain: plainAxiosInstance
 });
 
-const theApp = new Vue({
-  store,
-  router,
-  render: h => h(App)
-}).$mount("#app");
+window.addEventListener('load', function()) {
+  const theApp = new Vue({
+    store,
+    router,
+    render: h => h(App)
+  }).$mount("#app");
+};
+
