@@ -15,7 +15,6 @@ export default {
   components: {
     ClockLoading
   },
-  data() {},
   mounted() {}
 };
 </script>
@@ -37,16 +36,16 @@ export default {
   justify-content: space-between;
 
   &:after {
-    background-color: rgba(0, 0, 0, 0.75);
-    content: "";
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
+     background-color: rgba(21, 20, 20, .69) !important;
+        content: '';
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
   }
 }
 
