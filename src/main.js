@@ -11,6 +11,8 @@ import store from "./AppStore";
 import determinedDatabaseURL from "./helpers/determinedDatabaseURL";
 import availableEndpoints from "../src/backend/axios/availableEndpoints";
 import Fragment from "vue-fragment";
+require("dotenv").config();
+
 Vue.use(Fragment.Plugin);
 
 Vue.prototype.$properApiURL = determinedDatabaseURL();
