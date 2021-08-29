@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import PageTitleBlock from "@/components/common/PageTitleBlock.vue";
 import GoBackLink from "@/components/common/go-back/GoBackLink.vue";
 import GoBackLinkListItem from "@/components/common/go-back/GoBackLinkListItem.vue";
@@ -76,7 +77,7 @@ export default {
 
   methods: {
     signin() {
-      this.$http.plain
+      axios
         .post(`${this.$availableEndpoints.signin}`, {
           email: this.email,
           password: this.password
