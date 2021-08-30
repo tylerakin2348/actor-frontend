@@ -93,7 +93,7 @@ export default {
       this.$router.replace("/");
     },
     signinFailed(error) {
-      console.log("asdf");
+      console.log("asdf", error.response.status, error.response);
       if (error.response.status === 401) {
         this.error = "Invalid email or password";
       } else {
