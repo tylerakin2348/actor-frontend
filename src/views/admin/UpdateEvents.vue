@@ -75,11 +75,9 @@ export default {
   methods: {
     setEventBeingEdited: function(event) {
       this.eventCurrentlyBeingEdited = event;
-      console.log("hello from edited event", event);
     },
     stageEventForDeletion: function(event) {
       this.stagedForDeletion = event;
-      console.log("hello from delte event");
     },
     setError(error, text) {
       this.error = (error.response && error.response.data && error.response.data.error) || text;

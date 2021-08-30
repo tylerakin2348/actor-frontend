@@ -68,11 +68,7 @@ export default {
     };
   },
   created() {
-    if (!localStorage.signedIn) {
-      this.$router.replace("/");
-    } else {
-      this.getCurrentActingCredits();
-    }
+    this.getCurrentActingCredits();
   },
   computed: {
     acting_credits: function() {

@@ -8,17 +8,10 @@
             <b class="credit-row-title">Event Group</b>
             {{ event.event_company }}
           </div>
-          <!-- <div class="credit-row">
-            <b class="credit-row-title">Start Date</b>
-            {{ event.event_start_date }}
-          </div>
+
           <div class="credit-row">
-            <b class="credit-row-title">End Date</b>
-            {{ event.event_end_date }}
-          </div> -->
-          <div class="credit-row">
-            <b class="credit-row-title">Event URL</b>
-            {{ event.event_url }}
+            <b class="credit-row-title">Event Information</b>
+            <a :href="event.event_url" target="_blank">Learn More About The Event</a>
           </div>
         </article>
       </div>

@@ -132,7 +132,6 @@ export default {
       this.$router.replace("/admin");
     },
     signupFailed(error) {
-      console.log(error);
       this.error =
         (error.response && error.response.data && error.response.data.error) ||
         "Something went wrong";

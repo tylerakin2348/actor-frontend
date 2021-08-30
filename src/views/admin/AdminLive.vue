@@ -13,7 +13,6 @@
     </bordered-left-title-column>
 
     <centered-management-navigation>
-      <div class="text-red" v-if="error">{{ error }}</div>
       <router-link
         class="btn btn-outline-secondary outline-fixed-width-style m-2"
         :to="{ path: '/admin/live/chat/new' }"

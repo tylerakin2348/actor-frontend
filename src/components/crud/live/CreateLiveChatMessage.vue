@@ -56,8 +56,7 @@ export default {
           this.message = "";
           this.$emit("check-messages");
           this.$store.commit("updateChatStatus", true);
-        })
-        .catch(error => console.log(error));
+        });
     },
 
     destroyChat() {
@@ -74,8 +73,7 @@ export default {
           .delete(`${this.$availableEndpoints.live_chat}/${message._id}`)
           .then(response => {
             this.$emit("check-messages");
-          })
-          .catch(error => console.log(error));
+          });
       });
 
       setTimeout(() => {

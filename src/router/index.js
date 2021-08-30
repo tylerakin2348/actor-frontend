@@ -132,11 +132,11 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (shouldNotBeVisitingAdminScreen() && to.path.includes("admin")) {
-    next({ name: "Sign In" });
-  } else {
-    next();
-  }
+  // if (shouldNotBeVisitingAdminScreen() && to.path.includes("admin")) {
+  //   next({ name: "Sign In" });
+  // } else {
+  next();
+  // }
 });
 
 export default router;

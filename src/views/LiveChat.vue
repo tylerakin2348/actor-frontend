@@ -37,7 +37,7 @@ import ClockLoading from "@/components/loading/ClockLoading.vue";
 import checkForAvailableData from "../helpers/checkForAvailableData";
 import ScrollingDataContainer from "@/components/layout-containers/ScrollingDataContainer.vue";
 import BorderedLeftTitleColumn from "@/components/layout-containers/BorderedLeftTitleColumn.vue";
-import BorderedLeftTitleStyleContainer from '../components/layout-containers/BorderedLeftTitleStyleContainer.vue';
+import BorderedLeftTitleStyleContainer from "../components/layout-containers/BorderedLeftTitleStyleContainer.vue";
 
 export default {
   name: "LiveChat",
@@ -85,23 +85,19 @@ export default {
     },
 
     checkForNewMessage: function() {
-      this.$http.secured
-        .get(`${this.$availableEndpoints.live_chat}`)
-        .then(response => {
-          checkForAvailableData(this, response, 'updateChatStatus')
-          this.live_chats = response.data;
-          setTimeout(() => {
-            this.scrollToNewMessage();
-          }, 100);
-        })
-        .catch(error => console.log(error));
+      this.$http.secured.get(`${this.$availableEndpoints.live_chat}`).then(response => {
+        checkForAvailableData(this, response, "updateChatStatus");
+        this.live_chats = response.data;
+        setTimeout(() => {
+          this.scrollToNewMessage();
+        }, 100);
+      });
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-
 .chat-box-shadow {
   box-shadow: inset 0 0 7px 0px lightgrey;
 }

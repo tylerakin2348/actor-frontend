@@ -12,6 +12,7 @@ export default {
 
 <style lang="scss" scoped>
 .single-db-entry-container {
+  margin: 2em 0;
   width: 100%;
   @media screen and (min-width: 769px) {
     width: 50%;

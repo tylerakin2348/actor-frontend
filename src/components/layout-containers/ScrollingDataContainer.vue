@@ -39,15 +39,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@media screen and (min-width: 769px) {
-  .block-container-row {
-    align-items: flex-end;
-    height: 100vh;
-    &.align-content-center {
-      align-items: center;
-    }
-  }
-}
 .data-content-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -62,7 +53,7 @@ export default {
   display: flex;
   height: 100%;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   justify-content: flex-end;
 }
 
@@ -72,6 +63,15 @@ export default {
   @media screen and (min-width: 769px) {
     padding-top: 12vh;
     overflow-y: scroll;
+  }
+}
+@media screen and (min-width: 769px) {
+  .block-container-row {
+    align-items: flex-start;
+    height: 100vh;
+    &.align-content-center {
+      align-items: center;
+    }
   }
 }
 </style>

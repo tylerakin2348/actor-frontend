@@ -32,12 +32,12 @@ export default {
   name: "RemoveEvent",
   props: ["acting_credit", "modal_id"],
   components: {
-    Modal,
+    Modal
   },
   data() {
     return {
       error: "",
-      stagedForDeletion: "",
+      stagedForDeletion: ""
     };
   },
   mounted() {},
@@ -47,12 +47,11 @@ export default {
       this.stagedForDeletion = "";
       this.$http.secured
         .delete(`${this.$properApiURL}/api/v1/acting-credits/${record._id}`)
-        .then((response) => {
-          this.$store.commit('remove_acting_credit', record)
-        })
-        .catch((error) => console.log(error));
+        .then(response => {
+          this.$store.commit("remove_acting_credit", record);
+        });
       jQuery("#" + this.$props.modal_id).modal("hide");
-    },
-  },
+    }
+  }
 };
 </script>

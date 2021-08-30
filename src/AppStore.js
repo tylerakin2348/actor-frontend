@@ -71,7 +71,6 @@ const store = new Vuex.Store({
     },
     currentUser: state => {
       let theCurrentUser = JSON.parse(state.current_user);
-      console.log(theCurrentUser);
       return theCurrentUser.first_name + " " + theCurrentUser.last_name;
     },
     currentChatStatus: state => {

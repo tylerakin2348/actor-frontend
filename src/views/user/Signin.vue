@@ -86,14 +86,12 @@ export default {
         .catch(error => this.signinFailed(error));
     },
     signinSuccessful(response) {
-      console.log(response);
       this.$store.commit("set_current_user", response.data.user);
       this.$store.commit("set_logged_in_status", true);
       this.error = "";
       this.$router.replace("/");
     },
     signinFailed(error) {
-      console.log("asdf", error.response.status, error.response);
       if (error.response.status === 401) {
         this.error = "Invalid email or password";
       } else {
