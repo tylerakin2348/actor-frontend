@@ -43,6 +43,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
 
   @media screen and (min-width: 769px) {
     justify-content: flex-start;

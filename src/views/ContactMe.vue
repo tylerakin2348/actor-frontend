@@ -38,7 +38,7 @@ import BorderedLeftTitleStyleContainer from "@/components/layout-containers/Bord
 import CenteredManagementNavigation from "@/components/layout-containers/CenteredManagementNavigation.vue";
 
 export default {
-  name: "Page Title Block",
+  name: "ContactMe",
   components: {
     PageTitleBlock,
     GoBackLink,
@@ -82,20 +82,22 @@ export default {
 .copyright_signal {
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
-  position: absolute;
-  bottom: 0%;
-  right: 0%;
   padding: 1em;
+  @media screen and (min-width: 769px) {
+    position: absolute;
+    bottom: 0%;
+    right: 0;
+  }
 }
 .tylerakin_dot_com_link {
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
-  position: absolute;
-  bottom: 0%;
-  left: 0;
   padding: 1em;
-  &:focus,
-  &:hover {
+
+  @media screen and (min-width: 769px) {
+    position: absolute;
+    bottom: 0%;
+    left: 0;
   }
 }
 </style>

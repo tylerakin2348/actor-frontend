@@ -9,7 +9,7 @@
       </GoBackNavigationList>
     </bordered-left-title-column>
 
-    <scrolling-data-container v-if="events">
+    <scrolling-data-container v-if="events" component_classes="align-content-center">
       <single-db-entry-container v-for="event in events" :key="event.id">
         <SingleEvent :event="event" :can_edit="false" />
       </single-db-entry-container>
