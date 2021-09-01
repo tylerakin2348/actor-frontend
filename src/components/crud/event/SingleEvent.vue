@@ -90,6 +90,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.event-link {
+  color: #1972d2;
+  text-decoration: underline;
+
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
+}
 .credit-row {
   display: flex;
   flex-direction: column;
