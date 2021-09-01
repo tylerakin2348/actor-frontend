@@ -1,11 +1,9 @@
 <template>
   <div id="contacts" class="single_event_item">
     <div class="flex items-center justify-between flex-wrap">
-      <div
-        class="single-acting-credit-wrapper flex-1 flex justify-between flex-wrap"
-      >
+      <div class="single-acting-credit-wrapper flex-1 flex justify-between flex-wrap">
         <article class="block font-mono font-semibold flex items-center">
-          <!-- <b>{{ live_chat.message }}</b> -->
+          <h2 class="sr-only">Chat entry from {{ this.prettiedTime }}</h2>
           <div class="credit-row">
             {{ live_chat.message }}
 
@@ -29,17 +27,17 @@ export default {
     liveChatCurrentlyBeingEdited: String,
     can_edit: {
       default: true,
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
   components: {
-    UpdateLiveChatMessage,
+    UpdateLiveChatMessage
   },
   data() {
     return {
       canEdit: false,
       newChat: [],
-      prettiedTime: null,
+      prettiedTime: null
     };
   },
   mounted() {
@@ -51,28 +49,29 @@ export default {
   methods: {
     setPrettiedTime() {
       let theTimeFromProp = new Date(this.$props.live_chat.time_created);
-      theTimeFromProp = theTimeFromProp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      theTimeFromProp = theTimeFromProp.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit"
+      });
 
       this.prettiedTime = theTimeFromProp;
     },
     setError(error, text) {
-      this.error =
-        (error.response && error.response.data && error.response.data.error) ||
-        text;
+      this.error = (error.response && error.response.data && error.response.data.error) || text;
     },
 
     removeEvent(event) {
       this.$http.secured
         .delete(`${this.$availableEndpoints.live_chat}/${event.id}`)
-        .then((response) => {
+        .then(response => {
           this.events.splice(this.events.indexOf(event), 1);
         })
-        .catch((error) => this.setError(error, "Cannot delete record"));
+        .catch(error => this.setError(error, "Cannot delete record"));
     },
     editEvent(event) {
       this.liveChatCurrentlyBeingEdited = event;
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -1,16 +1,17 @@
 <template>
-  <div class="block-container d-flex flex-wrap align-items-end">
-    <div class="block-container-row large-breakup-border col-12 col-md-5 p-0">
+  <bordered-left-title-style-container>
+    <bordered-left-title-column>
       <PageTitleBlock page_title="Dashboard" classes="h1" />
       <GoBackNavigationList>
         <GoBackLinkListItem>
           <GoBackLink url="/" link_text="Back to Home" include_as_list_item="true" />
         </GoBackLinkListItem>
       </GoBackNavigationList>
-    </div>
-    <div class="overflow-scroll-container block-container-row col-12 col-md-7">
+    </bordered-left-title-column>
+
+    <centered-management-navigation>
       <nav aria-label="Management Options">
-        <ul>
+        <ul class="mb-0">
           <li>
             <router-link
               class="btn btn-outline-secondary m-2 outline-fixed-width-style"
@@ -45,8 +46,8 @@
           </li>
         </ul>
       </nav>
-    </div>
-  </div>
+    </centered-management-navigation>
+  </bordered-left-title-style-container>
 </template>
 <script>
 /* eslint-disable */
@@ -57,6 +58,10 @@ import LayoutColumn from "@/components/layout-containers/LayoutColumn.vue";
 import GoBackLink from "@/components/common/go-back/GoBackLink.vue";
 import GoBackLinkListItem from "@/components/common/go-back/GoBackLinkListItem.vue";
 import GoBackNavigationList from "@/components/common/go-back/GoBackNavigationList.vue";
+import BorderedLeftTitleColumn from "@/components/layout-containers/BorderedLeftTitleColumn.vue";
+import BorderedLeftTitleStyleContainer from "@/components/layout-containers/BorderedLeftTitleStyleContainer.vue";
+import CenteredManagementNavigation from "@/components/layout-containers/CenteredManagementNavigation.vue";
+
 export default {
   name: "AdminScreen",
   components: {
@@ -66,7 +71,10 @@ export default {
     LayoutColumn,
     GoBackLink,
     GoBackLinkListItem,
-    GoBackNavigationList
+    GoBackNavigationList,
+    BorderedLeftTitleColumn,
+    BorderedLeftTitleStyleContainer,
+    CenteredManagementNavigation
   },
 
   methods: {

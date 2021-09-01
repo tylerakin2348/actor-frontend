@@ -1,7 +1,7 @@
 <template>
   <transition name="loading-screen-fade">
     <div class="homepage-wrapper align-items-center justify-content-center">
-      <img :src="require(`@/assets/next-to-normal/tyler_white_out.jpg`)" />
+      <img :src="require(`@/assets/next-to-normal/tyler_white_out.jpg`)" alt="" />
       <ClockLoading component_classes="color-scheme-light" />
     </div>
   </transition>
@@ -36,16 +36,16 @@ export default {
   justify-content: space-between;
 
   &:after {
-     background-color: rgba(21, 20, 20, .69) !important;
-        content: '';
-        display: inline-block;
-        height: 100%;
-        width: 100%;
-        z-index: 1;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
+    background-color: rgba(21, 20, 20, 0.69) !important;
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
   }
 }
 

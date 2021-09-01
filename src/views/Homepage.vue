@@ -1,54 +1,55 @@
 <template>
   <fragment>
-    <LoadingScreen v-if="is_loading" />
+    <main class="main-content">
+      <LoadingScreen v-if="is_loading" />
 
-    <div id="do-not-scroll-on-mobile" v-if="!is_loading">
-      <div :class="current_chat_status ? 'homepage-wrapper active-chat' : 'homepage-wrapper'">
-        <img :src="require(`@/assets/next-to-normal/next_to_normal18.jpg`)" />
-        <layout-row
-          class="
+      <div id="do-not-scroll-on-mobile" v-if="!is_loading">
+        <div :class="current_chat_status ? 'homepage-wrapper active-chat' : 'homepage-wrapper'">
+          <img :src="require(`@/assets/next-to-normal/next_to_normal18.jpg`)" alt="" />
+          <layout-row
+            class="
                         calculated-subject-row-height
                         justify-content-between
                     "
-        >
-          <SubjectBlockClear
-            link_url="upcoming-events"
-            link_image_src="assets/next-to-normal/next_to_normal12.jpg"
-            link_text_line_1="Upcoming"
-            link_text_line_2="Events"
-            classes="top-left h-100"
-          />
-          <SubjectBlockClear
-            link_url="about"
-            link_image_src="assets/next-to-normal/next_to_normal4.jpg"
-            link_text_line_1="About"
-            link_text_line_2="Me"
-            classes="top-right h-100"
-          />
-        </layout-row>
-        <layout-row class="middle-row">
-          <layout-column
-            class="
+          >
+            <SubjectBlockClear
+              link_url="upcoming-events"
+              link_image_src="assets/next-to-normal/next_to_normal12.jpg"
+              link_text_line_1="Upcoming"
+              link_text_line_2="Events"
+              classes="top-left h-100"
+            />
+            <SubjectBlockClear
+              link_url="about"
+              link_image_src="assets/next-to-normal/next_to_normal4.jpg"
+              link_text_line_1="About"
+              link_text_line_2="Me"
+              classes="top-right h-100"
+            />
+          </layout-row>
+          <layout-row class="middle-row">
+            <layout-column
+              class="
                             d-flex
                             align-items-center
                             justify-content-center
                             flex-column
                             col-12
                         "
-            v-if="current_chat_status"
-          >
-            <div
-              class="
+              v-if="current_chat_status"
+            >
+              <div
+                class="
                                 d-flex
                                 align-items-center
                                 justify-content-center
                                 flex-column
                                 col-12
                             "
-            >
-              <span class="h2">Tyler Akin</span>
-              <router-link
-                class="
+              >
+                <span class="h2">Tyler Akin</span>
+                <router-link
+                  class="
                                 bg-transparent
                                 text-sm
                                 hover:bg-blue
@@ -61,51 +62,52 @@
                                 px-4
                                 rounded
                             "
-                :to="{ path: '/live-chat' }"
-              >
-                Live Updates
-              </router-link>
-            </div>
-          </layout-column>
-          <layout-column
-            class="
+                  :to="{ path: '/live-chat' }"
+                >
+                  Live Updates
+                </router-link>
+              </div>
+            </layout-column>
+            <layout-column
+              class="
                             d-flex
                             align-items-center
                             justify-content-center
                             flex-column
                             col-12
                         "
-            v-else
-          >
-            <span class="h5">Actor</span>
-            <span class="h2">Tyler Akin</span>
-            <span class="h5">Tenor</span>
-          </layout-column>
-        </layout-row>
-        <layout-row
-          class="
+              v-else
+            >
+              <span class="h5">Actor</span>
+              <h1 class="h2">Tyler Akin</h1>
+              <span class="h5">Tenor</span>
+            </layout-column>
+          </layout-row>
+          <layout-row
+            class="
                         calculated-subject-row-height
                         justify-content-between
                     "
-        >
-          <SubjectBlockClear
-            link_url="previous-roles"
-            link_image_src="assets/next-to-normal/next_to_normal18.jpg"
-            link_text_line_1="Previous"
-            link_text_line_2="Roles"
-            classes="bottom-left h-100"
-          />
-          <SubjectBlockClear
-            link_url="contact-me"
-            link_image_src="assets/next-to-normal/next_to_normal16.jpg"
-            link_text_line_1="Contact"
-            link_text_line_2="Me"
-            classes="bottom-right h-100"
-          />
-        </layout-row>
-        <AdminAccess v-if="is_logged_in" />
+          >
+            <SubjectBlockClear
+              link_url="previous-roles"
+              link_image_src="assets/next-to-normal/next_to_normal18.jpg"
+              link_text_line_1="Previous"
+              link_text_line_2="Roles"
+              classes="bottom-left h-100"
+            />
+            <SubjectBlockClear
+              link_url="contact-me"
+              link_image_src="assets/next-to-normal/next_to_normal16.jpg"
+              link_text_line_1="Contact"
+              link_text_line_2="Me"
+              classes="bottom-right h-100"
+            />
+          </layout-row>
+          <AdminAccess v-if="is_logged_in" />
+        </div>
       </div>
-    </div>
+    </main>
   </fragment>
 </template>
 <script>
@@ -176,6 +178,10 @@ export default {
 <style lang="scss" scoped>
 #app {
   overflow: hidden;
+}
+
+.main-content {
+  height: 100%;
 }
 
 .middle-row {

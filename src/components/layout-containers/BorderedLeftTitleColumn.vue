@@ -1,17 +1,16 @@
 <template>
-    <div class="block-container-row large-breakup-border col-12 col-md-5 p-0">
-        <slot></slot>
-    </div>
+  <aside class="block-container-row large-breakup-border col-12 col-md-5 p-0">
+    <slot></slot>
+  </aside>
 </template>
 <script>
 /* eslint-disable */
 export default {
-  name: "BorderedLeftTitleColumn",
+  name: "BorderedLeftTitleColumn"
 };
 </script>
 
 <style lang="scss" scoped>
-
 .large-breakup-border {
   padding: 0;
 }

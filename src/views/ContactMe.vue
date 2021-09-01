@@ -8,7 +8,6 @@
         </GoBackLinkListItem>
       </GoBackNavigationList>
     </bordered-left-title-column>
-
     <centered-management-navigation>
       <h2>Contact Me</h2>
       <div class="contact-row">

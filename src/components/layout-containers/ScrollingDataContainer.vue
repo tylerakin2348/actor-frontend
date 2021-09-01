@@ -1,8 +1,8 @@
 <template>
-  <fragment>
+  <main class="main-content col-12 col-md-7 justify-content-start align-content-center">
     <div
       v-if="!content_is_loading"
-      class="overflow-scroll-container block-container-row col-12 col-md-7 justify-content-start"
+      class="overflow-scroll-container block-container-row justify-content-start"
       :class="component_classes"
     >
       <div class="data-content-wrapper">
@@ -12,7 +12,7 @@
     <centered-management-navigation v-else>
       <ClockLoading component_classes="color-scheme-dark small-clock" />
     </centered-management-navigation>
-  </fragment>
+  </main>
 </template>
 
 <script>

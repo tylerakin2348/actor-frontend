@@ -1,7 +1,7 @@
 <template>
   <div class="background-image">
     <bordered-left-title-style-container component_classes="align-content-center">
-      <img :src="require(`@/assets/next-to-normal/next_to_normal18.jpg`)" />
+      <img :src="require(`@/assets/next-to-normal/next_to_normal18.jpg`)" alt="" />
       <bordered-left-title-column>
         <PageTitleBlock page_title="Live Chat" classes="h1" />
         <GoBackNavigationList>

@@ -1,12 +1,12 @@
 <template>
-  <div
-    class="centered-management-navigation block-container-row col-12 col-md-7 justify-content-center align-content-center"
+  <main
+    class="centered-management-navigation block-container-row col-12 col-md-7 justify-content-center align-content-center align-items-center"
     :class="component_classes"
   >
     <div class="centered-management-navigation--inner">
       <slot></slot>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
