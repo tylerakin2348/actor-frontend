@@ -11,7 +11,9 @@
 
           <div class="credit-row">
             <b class="credit-row-title">Event Information</b>
-            <a :href="event.event_url" target="_blank">Learn More About The Event</a>
+            <a :href="event.event_url" class="event-link" target="_blank"
+              >Learn More About The Event</a
+            >
           </div>
         </article>
       </div>
