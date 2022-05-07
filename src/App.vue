@@ -31,7 +31,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+html {
+  height: -webkit-fill-available;
+}
+
 body {
+  min-height: 100vh;
+  /* mobile viewport bug fix */
+  min-height: -webkit-fill-available;
   margin: 0;
   overflow: hidden;
 }
