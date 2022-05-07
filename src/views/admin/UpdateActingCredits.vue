@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import _orderBy from "lodash/orderBy";
+
 import PageTitleBlock from "@/components/common/PageTitleBlock.vue";
 import SingleActingCredit from "@/components/crud/acting-credit/SingleActingCredit.vue";
 import GoBackLink from "@/components/common/go-back/GoBackLink.vue";
@@ -72,7 +74,7 @@ export default {
   },
   computed: {
     acting_credits: function() {
-      return this.$store.state.acting_credits;
+      return _orderBy(this.$store.state.acting_credits, ["_id"], ["desc"]);
     }
   },
   methods: {

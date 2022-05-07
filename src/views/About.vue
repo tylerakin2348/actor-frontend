@@ -10,17 +10,29 @@
     </bordered-left-title-column>
 
     <scrolling-data-container>
-      <div class="about-page-wrapper col-12 h2">
-        A recurring member of the CenterStage company. And a trained vocalist. Outside of theatre
-        and music in general, Tyler is a software developer in Louisville, Kentuky. He builds
-        websites like the one holding the words you are reading.
-        <br />
-        <br />
-        Vocal Experience includes:
-        <ul>
-          <li>Private Voice - Anna O'Byrne</li>
-          <li>Private Voice - Dr. Gregory Brewton</li>
-        </ul>
+      <div class="about-page-wrapper col-12">
+        <div class="headshot">
+          <img :src="require(`@/assets/tyler_a.jpg`)" alt="Tyler Akin headshot" />
+        </div>
+        <p>
+          Based in Louisville Kentucky, Tyler Akin is an actor currently collaborating with a number
+          of local, community theatre companies. He has most recently been seen in Big Fish
+          (TheatreWorks), Guys and Dolls (METC), Joseph (CenterStage), and Next To Normal (CAMT). He
+          is slated to portray Guy in the musical ONCE this summer and looks forward to working with
+          the cast and crew of
+          <a href="https://www.timesliptheatre.org/" target="_blank">Time Slip Theatre</a>.
+        </p>
+        <p>
+          He holds a Bachelors of Science in Music and Worship, with a Vocal Studies concentration.
+          Post-undergraduate work, he has continued vocal training and currently works with Anna
+          O'Byrne— the actress who originated the role of Christine in the Australian production of
+          Love Never Dies.
+        </p>
+        <p>
+          Outside of acting, Tyler works as a software engineer, drinking an unhealthy amount of
+          coffee to get him through it. He builds websites like the one holding the words you are
+          reading.
+        </p>
       </div>
     </scrolling-data-container>
   </bordered-left-title-style-container>
@@ -50,9 +62,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.no-list-style {
+  list-style: none;
+}
+.headshot {
+  width: 100%;
+  max-width: 20em;
+  margin: auto;
+  margin-bottom: 1em;
+  border: 2px solid white;
+  box-shadow: 0 0 7px;
+  overflow: hidden;
+
+  img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+}
 .about-page-wrapper {
   padding-top: 1em;
   text-align: left;
+  margin: auto;
+  max-width: 40em;
 }
 .large-breakup-border {
   padding: 0;

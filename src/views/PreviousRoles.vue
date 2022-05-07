@@ -12,7 +12,7 @@
       <ClockLoading component_classes="color-scheme-dark small-clock" />
     </centered-management-navigation> -->
     <scrolling-data-container>
-      <single-db-entry-container v-for="acting_credit in acting_credits" :key="acting_credit.id">
+      <single-db-entry-container v-for="acting_credit in orderedRoles" :key="acting_credit.id">
         <SingleActingCredit :acting_credit="acting_credit" :can_edit="false" />
       </single-db-entry-container>
     </scrolling-data-container>
@@ -20,6 +20,7 @@
 </template>
 <script>
 /* eslint-disable */
+import _orderBy from "lodash/orderBy";
 import axios from "axios";
 import PageTitleBlock from "@/components/common/PageTitleBlock.vue";
 import SingleActingCredit from "@/components/crud/acting-credit/SingleActingCredit.vue";
@@ -71,6 +72,11 @@ export default {
   },
   beforeDestroy() {
     this.$store.commit("set_content_loading_status", false);
+  },
+  computed: {
+    orderedRoles: function() {
+      return _orderBy(this.acting_credits, ["_id"], ["desc"]);
+    }
   }
 };
 </script>

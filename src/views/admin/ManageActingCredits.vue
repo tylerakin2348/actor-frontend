@@ -54,7 +54,7 @@ export default {
     CreateActingCredit,
     GoBackLink,
     GoBackLinkListItem,
-    GoBackNavigationList,
+    GoBackNavigationList
   },
   data() {
     return {
@@ -63,7 +63,7 @@ export default {
       newRecord: [],
       error: "",
       actingCreditCurrentlyBeingEdited: "",
-      addNewActingCredit: false,
+      addNewActingCredit: false
     };
   },
   created() {
@@ -72,24 +72,23 @@ export default {
     } else {
       this.$http.secured
         .get(`${this.$properApiURL}/api/v1/acting-credits`)
-        .then((response) => {
+        .then(response => {
           this.acting_credits = response.data;
         })
-        .catch((error) => this.setError(error, "Something went wrong"));
+        .catch(error => this.setError(error, "Something went wrong"));
 
       this.$http.secured
         .get(`${this.$properApiURL}/api/v1/acting-credits`)
-        .then((response) => {
+        .then(response => {
           this.artists = response.data;
         })
-        .catch((error) => this.setError(error, "Something went wrong"));
+        .catch(error => this.setError(error, "Something went wrong"));
     }
   },
+
   methods: {
     setError(error, text) {
-      this.error =
-        (error.response && error.response.data && error.response.data.error) ||
-        text;
+      this.error = (error.response && error.response.data && error.response.data.error) || text;
     },
     addRecord() {
       const value = this.newRecord;
@@ -101,16 +100,16 @@ export default {
           show_title: this.newRecord.show_title,
           show_role: this.newRecord.show_role,
           show_director_name: this.newRecord.show_director_name,
-          show_company_name: this.newRecord.show_company_name,
+          show_company_name: this.newRecord.show_company_name
         })
 
-        .then((response) => {
+        .then(response => {
           this.acting_credits.push(response.data);
           this.newRecord = "";
         })
-        .catch((error) => this.setError(error, "Cannot create record"));
-    },
-  },
+        .catch(error => this.setError(error, "Cannot create record"));
+    }
+  }
 };
 </script>
 

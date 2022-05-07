@@ -5,6 +5,7 @@
 
       <div class="mb-6 credit-row">
         <label for="event_name" class="label credit-row-title">Event Name</label>
+
         <input
           id="event_name"
           class="input"
@@ -16,39 +17,80 @@
       </div>
 
       <div class="mb-6 credit-row">
-        <label for="event_group" class="label credit-row-title">Associated Event Group</label>
+        <label for="event_date" class="label credit-row-title">Event Date</label>
+
         <input
-          id="event_group"
+          id="event_date"
           class="input"
           autofocus
           autocomplete="off"
-          placeholder="Event Group"
-          v-model="newEvent.event_company"
+          placeholder="Type a Event date"
+          v-model="newEvent.event_date"
         />
       </div>
 
       <div class="mb-6 credit-row">
         <label for="event_start_date" class="label credit-row-title">Event Start Date</label>
-        <!-- <input
+
+        <input
           id="event_start_date"
           class="input"
           autofocus
           autocomplete="off"
-          placeholder="Event Start Date"
-          v-model="newEvent.event_start_date"
-        /> -->
+          placeholder="Type a event start date"
+          v-model="newEvent.start_date"
+        />
       </div>
 
       <div class="mb-6 credit-row">
         <label for="event_end_date" class="label credit-row-title">Event End Date</label>
-        <!-- <input
+
+        <input
           id="event_end_date"
           class="input"
           autofocus
           autocomplete="off"
-          placeholder="Event End Date"
-          v-model="newEvent.event_end_date"
-        /> -->
+          placeholder="Type a event end date"
+          v-model="newEvent.end_date"
+        />
+      </div>
+
+      <div class="mb-6 credit-row">
+        <label for="event_description" class="label credit-row-title">Event Description</label>
+
+        <textarea
+          id="event_description"
+          class="input"
+          autofocus
+          autocomplete="off"
+          placeholder="Type a description"
+          v-model="newEvent.description"
+        >
+        </textarea>
+      </div>
+
+      <div class="mb-6 credit-row">
+        <label for="event_company" class="label credit-row-title">Event Company</label>
+        <input
+          id="event_company"
+          class="input"
+          autofocus
+          autocomplete="off"
+          placeholder="Event company"
+          v-model="newEvent.event_company"
+        />
+      </div>
+
+      <div class="mb-6 credit-row">
+        <label for="event_role" class="label credit-row-title">Role</label>
+        <input
+          id="event_role"
+          class="input"
+          autofocus
+          autocomplete="off"
+          placeholder="Role"
+          v-model="newEvent.role"
+        />
       </div>
 
       <div class="mb-6 credit-row">
@@ -100,6 +142,11 @@ export default {
         .post(`${this.$availableEndpoints.events}`, {
           event_name: this.newEvent.event_name,
           event_company: this.newEvent.event_company,
+          event_date: this.newEvent.event_date,
+          start_date: this.newEvent.start_date,
+          end_date: this.newEvent.end_date,
+          description: this.newEvent.description,
+          role: this.newEvent.role,
           event_url: this.newEvent.event_url
         })
 

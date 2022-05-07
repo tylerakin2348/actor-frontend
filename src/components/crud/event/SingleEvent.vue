@@ -3,16 +3,26 @@
     <div class="flex items-center justify-between flex-wrap">
       <div class="single-acting-credit-wrapper flex-1 flex justify-between flex-wrap">
         <article class="block font-mono font-semibold flex items-center">
-          <h1>{{ event.event_name }}</h1>
-          <div class="credit-row">
-            <b class="credit-row-title">Event Group</b>
-            {{ event.event_company }}
+          <h1 class="mb-0">{{ event.event_name }}</h1>
+          <div v-if="event.event_date" class="credit-row mb-2">
+            {{ formattedDate(event.event_date) }}
+          </div>
+          <div v-if="event.start_date">
+            <div class="credit-row mb-2">
+              {{ formattedDate(event.start_date) }} - {{ formattedDate(event.end_date) }}
+            </div>
           </div>
 
-          <div class="credit-row">
-            <b class="credit-row-title">Event Information</b>
+          <div v-if="event.description" class="credit-row mb-3">
+            {{ event.description }}
+          </div>
+          <div v-if="event.event_company" class="credit-row mb-3">
+            <b class="credit-row-title">Company</b>
+            {{ event.event_company }}
+          </div>
+          <div v-if="event.event_url" class="credit-row">
             <a :href="event.event_url" class="event-link" target="_blank"
-              >Learn More About The Event</a
+              >Get More Information <span class="sr-only">about this event</span></a
             >
           </div>
         </article>
@@ -47,6 +57,7 @@
 </template>
 
 <script>
+import moment from "moment";
 import UpdateEvent from "@/components/crud/event/UpdateEvent.vue";
 import RemoveEvent from "@/components/crud/event/RemoveEvent.vue";
 
@@ -75,6 +86,11 @@ export default {
   },
   mounted() {},
   methods: {
+    formattedDate(theDateToFormat) {
+      return `${moment(theDateToFormat)
+        .utc()
+        .format("M/D")}`;
+    },
     setError(error, text) {
       this.error = (error.response && error.response.data && error.response.data.error) || text;
     },

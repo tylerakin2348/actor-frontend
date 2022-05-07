@@ -2,9 +2,7 @@
   <Modal :modal_id="modal_id">
     <form action="" @submit.prevent="updateTheEvent(event_from_props)">
       <div class="mb-6 credit-row">
-        <label for="event_name" class="label credit-row-title"
-          >Event Name</label
-        >
+        <label for="event_name" class="label credit-row-title">Event Name</label>
 
         <input
           id="event_name"
@@ -17,44 +15,79 @@
       </div>
 
       <div class="mb-6 credit-row">
-        <label for="event_group" class="label credit-row-title"
-          >Associated Event Group</label
-        >
+        <label for="event_date" class="label credit-row-title">Event Date</label>
+
         <input
-          id="event_group"
+          id="event_date"
           class="input"
           autofocus
           autocomplete="off"
-          placeholder="Event Group"
-          v-model="event_from_props.event_group"
+          placeholder="Type a Event date"
+          v-model="event_from_props.event_date"
         />
       </div>
 
       <div class="mb-6 credit-row">
-        <label for="event_start_date" class="label credit-row-title"
-          >Event Start Date</label
-        >
+        <label for="event_start_date" class="label credit-row-title">Event Start Date</label>
+
         <input
           id="event_start_date"
           class="input"
           autofocus
           autocomplete="off"
-          placeholder="Event Start Date"
-          v-model="event_from_props.event_start_date"
+          placeholder="Type a event start date"
+          v-model="event_from_props.start_date"
         />
       </div>
 
       <div class="mb-6 credit-row">
-        <label for="event_end_date" class="label credit-row-title"
-          >Event End Date</label
-        >
+        <label for="event_end_date" class="label credit-row-title">Event End Date</label>
+
         <input
           id="event_end_date"
           class="input"
           autofocus
           autocomplete="off"
-          placeholder="Event End Date"
-          v-model="event_from_props.event_end_date"
+          placeholder="Type a event end date"
+          v-model="event_from_props.end_date"
+        />
+      </div>
+
+      <div class="mb-6 credit-row">
+        <label for="event_description" class="label credit-row-title">Event Description</label>
+
+        <textarea
+          id="event_description"
+          class="input"
+          autofocus
+          autocomplete="off"
+          placeholder="Type a description"
+          v-model="event_from_props.description"
+        >
+        </textarea>
+      </div>
+
+      <div class="mb-6 credit-row">
+        <label for="event_company" class="label credit-row-title">Event Company</label>
+        <input
+          id="event_company"
+          class="input"
+          autofocus
+          autocomplete="off"
+          placeholder="Event company"
+          v-model="event_from_props.event_company"
+        />
+      </div>
+
+      <div class="mb-6 credit-row">
+        <label for="event_role" class="label credit-row-title">Role</label>
+        <input
+          id="event_role"
+          class="input"
+          autofocus
+          autocomplete="off"
+          placeholder="Role"
+          v-model="event_from_props.role"
         />
       </div>
 
@@ -80,6 +113,8 @@
 </template>
 
 <script>
+import moment from "moment";
+
 import jQuery from "jquery";
 import FormInput from "@/components/common/form-components/FormInput.vue";
 import Modal from "@/components/Modal.vue";
@@ -90,11 +125,11 @@ export default {
   props: ["event_from_props", "modal_id"],
   components: {
     FormInput,
-    Modal,
+    Modal
   },
   data() {
     return {
-      error: "",
+      error: ""
     };
   },
   mounted() {},
@@ -104,15 +139,23 @@ export default {
       this.$http.secured
         .put(`${this.$availableEndpoints.events}/${event._id}`, {
           event_name: event.event_name,
-          event_group: event.event_group,
-          event_start_date: event.event_start_date,
-          event_end_date: event.event_end_date,
-          event_url: event.event_url,
+          event_company: event.event_company,
+          event_date: event.event_date,
+          start_date: event.start_date,
+          end_date: event.end_date,
+          description: event.description,
+          role: event.role,
+          event_url: event.event_url
         })
-        .catch((error) => this.setError(error, "Cannot update record"));
+        .catch(error => this.setError(error, "Cannot update record"));
       jQuery("#" + this.$props.modal_id).modal("hide");
     },
-  },
+    formattedDate(theDateToFormat) {
+      return `${moment(theDateToFormat)
+        .utc()
+        .format("M/D")}`;
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
