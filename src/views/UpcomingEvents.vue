@@ -14,10 +14,10 @@
         <SingleEvent :event="event" :can_edit="false" />
       </single-db-entry-container>
     </scrolling-data-container>
-    <scrolling-data-container v-else>
+    <centered-management-navigation v-else>
       I must be taking a break. <br />
-      Stay tuned for new event announcements soon!
-    </scrolling-data-container>
+      Stay tuned for new things soon!
+    </centered-management-navigation>
   </bordered-left-title-style-container>
 </template>
 <script>

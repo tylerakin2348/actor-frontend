@@ -15,23 +15,17 @@
           <img :src="require(`@/assets/tyler_a.jpg`)" alt="Tyler Akin headshot" />
         </div>
         <p>
-          Based in Louisville Kentucky, Tyler Akin is an actor currently collaborating with a number
-          of local, community theatre companies. He has most recently been seen in Big Fish
-          (TheatreWorks), Guys and Dolls (METC), Joseph (CenterStage), and Next To Normal (CAMT). He
-          is slated to portray Guy in the musical ONCE this summer and looks forward to working with
-          the cast and crew of
-          <a href="https://www.timesliptheatre.org/" target="_blank">Time Slip Theatre</a>.
+          Based in Louisville Kentucky, Tyler Akin is an actor collaborating with a number of
+          community theatre companies. He most recently portrayed Guy in ONCE (Time Slip Theatre),
+          with additional recent appearances in BIG FISH (TheatreWorks), GUYS AND DOLLS (METC),
+          JOSEPH (CenterStage), and NEXT TO NORMAL (CAMT).
         </p>
         <p>
           He holds a Bachelors of Science in Music and Worship, with a Vocal Studies concentration.
-          Post-undergraduate work, he has continued vocal training and currently works with Anna
-          O'Byrne— the actress who originated the role of Christine in the Australian production of
-          Love Never Dies.
         </p>
         <p>
           Outside of acting, Tyler works as a software engineer, drinking an unhealthy amount of
-          coffee to get him through it. He builds websites like the one holding the words you are
-          reading.
+          coffee to get him through it. He builds websites, like this one.
         </p>
       </div>
     </scrolling-data-container>

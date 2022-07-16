@@ -1,5 +1,5 @@
 <template>
-  <main class="main-content col-12 col-md-7 justify-content-start align-content-center">
+  <main class="main-content col-12 col-md-7 pr-0 justify-content-start align-content-center">
     <div
       v-if="!content_is_loading"
       class="overflow-scroll-container block-container-row justify-content-start"
