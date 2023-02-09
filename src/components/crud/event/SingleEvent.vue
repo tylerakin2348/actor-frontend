@@ -16,6 +16,10 @@
           <div v-if="event.description" class="credit-row mb-3">
             {{ event.description }}
           </div>
+          <div v-if="event.role" class="credit-row">
+            <b class="credit-row-title">Role</b>
+            {{ event.role }}
+          </div>
           <div v-if="event.event_company" class="credit-row mb-3">
             <b class="credit-row-title">Company</b>
             {{ event.event_company }}

@@ -21,7 +21,9 @@
           JOSEPH (CenterStage), and NEXT TO NORMAL (CAMT).
         </p>
         <p>
-          He holds a Bachelors of Science in Music and Worship, with a Vocal Studies concentration.
+          Current castings include Wade "Cry Baby" Walker in CRY-BABY The Musical (March 2023,
+          Mind's Eye Theatre Company) and Mr. Kraler in The Diary Of Anne Frank (April 2023,
+          CenterStage).
         </p>
         <p>
           Outside of acting, Tyler works as a software engineer, drinking an unhealthy amount of
