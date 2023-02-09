@@ -5,7 +5,7 @@
 
       <div id="do-not-scroll-on-mobile" v-if="!is_loading">
         <div :class="current_chat_status ? 'homepage-wrapper active-chat' : 'homepage-wrapper'">
-          <img :src="require(`@/assets/next-to-normal/next_to_normal18.jpg`)" alt="" />
+          <img :src="require(`@/assets/once_guitar.jpg`)" alt="" />
           <layout-row
             class="
                         calculated-subject-row-height

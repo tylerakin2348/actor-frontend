@@ -1,7 +1,7 @@
 <template>
   <transition name="loading-screen-fade">
     <div class="homepage-wrapper align-items-center justify-content-center">
-      <img :src="require(`@/assets/next-to-normal/tyler_white_out.jpg`)" alt="" />
+      <img :src="require(`@/assets/once_guitar.jpg`)" alt="" />
       <ClockLoading component_classes="color-scheme-light" />
     </div>
   </transition>
